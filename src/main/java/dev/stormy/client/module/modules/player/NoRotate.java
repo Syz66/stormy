@@ -10,6 +10,7 @@ public class NoRotate extends Module {
     public NoRotate() {
         super("NoRotate", ModuleCategory.Player, 0);
     }
+
     @SubscribeEvent
     public void onPacket(PacketEvent.Receive event) {
         final Packet<?> packet = event.getPacket();

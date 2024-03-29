@@ -30,8 +30,8 @@ public class ClosetSpeed extends Module {
     @SubscribeEvent
     public void legitJump(TickEvent e) {
         if (mc.thePlayer != null) {
-            if (jump.isToggled() && !mc.thePlayer.isSneaking())  {
-                if (mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() ||mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()) {
+            if (jump.isToggled() && !mc.thePlayer.isSneaking()) {
+                if (mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()) {
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), true);
                 } else {
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindJump.getKeyCode(), false);

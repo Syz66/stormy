@@ -1,6 +1,6 @@
 package dev.stormy.client.utils.client;
 
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.modules.combat.AutoClicker;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
@@ -10,7 +10,6 @@ import net.weavemc.loader.api.event.EventBus;
 import net.weavemc.loader.api.event.MouseEvent;
 import org.lwjgl.input.Mouse;
 
-import java.awt.*;
 import java.nio.ByteBuffer;
 import java.util.Random;
 

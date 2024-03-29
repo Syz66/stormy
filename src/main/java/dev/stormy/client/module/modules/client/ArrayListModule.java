@@ -2,7 +2,7 @@ package dev.stormy.client.module.modules.client;
 
 import dev.stormy.client.clickgui.ArrayListPosition;
 import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;

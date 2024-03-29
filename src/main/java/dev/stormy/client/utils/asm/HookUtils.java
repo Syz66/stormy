@@ -1,6 +1,5 @@
 package dev.stormy.client.utils.asm;
 
-import me.tryfle.stormy.hooks.CPSHook;
 import net.weavemc.loader.api.event.EventBus;
 import net.weavemc.loader.api.event.MouseEvent;
 import org.lwjgl.input.Mouse;
@@ -25,12 +24,5 @@ public class HookUtils {
         }
         buttons.put(mouseButton, (byte) (held ? 1 : 0));
         ReflectionUtils.setPrivateValue(Mouse.class, null, buttons, "buttons");
-        if (held) {
-            if (mouseButton == 0) {
-                CPSHook.leftClick();
-            } else {
-                CPSHook.rightClick();
-            }
-        }
     }
 }

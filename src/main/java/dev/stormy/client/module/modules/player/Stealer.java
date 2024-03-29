@@ -6,7 +6,7 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.ItemUtils;
-import me.tryfle.stormy.events.UpdateEvent;
+import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.ContainerChest;
@@ -60,7 +60,7 @@ public class Stealer extends Module {
                     continue;
                 }
 
-                this.nextClick = Math.round(MathUtils.randomInt((int)delay.getInputMin(), (int)delay.getInputMax()));
+                this.nextClick = Math.round(MathUtils.randomInt((int) delay.getInputMin(), (int) delay.getInputMax()));
                 mc.playerController.windowClick(container.windowId, i, 0, 1, mc.thePlayer);
                 this.stopwatch.reset();
                 this.lastClick = 0;
@@ -114,7 +114,9 @@ public class Stealer extends Module {
 
             userInterface = (float) confidence / (float) totalSlots > 0.5f;
         }
-    };
+    }
+
+    ;
 
     public static boolean inGUI() {
         return userInterface;

@@ -9,8 +9,8 @@ import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.Packet;
 import net.weavemc.loader.api.event.*;
-import me.tryfle.stormy.events.EventDirection;
-import me.tryfle.stormy.events.PacketEvent;
+import dev.stormy.client.events.EventDirection;
+import dev.stormy.client.events.PacketEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -80,6 +80,7 @@ public class Blink extends Module {
             fakePlayer = null;
         }
     }
+
     public void handleInbound(Packet<?> packet) {
         Class<?> packetClass = packet.getClass();
         Method[] methods = NetHandlerPlayClient.class.getDeclaredMethods();

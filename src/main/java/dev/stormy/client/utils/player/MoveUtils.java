@@ -2,7 +2,7 @@ package dev.stormy.client.utils.player;
 
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.SubscribeEvent;
-import me.tryfle.stormy.events.MoveEvent;
+import dev.stormy.client.events.MoveEvent;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
 

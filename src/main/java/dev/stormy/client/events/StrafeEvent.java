@@ -1,4 +1,4 @@
-package me.tryfle.stormy.events;
+package dev.stormy.client.events;
 
 import net.weavemc.loader.api.event.Event;
 

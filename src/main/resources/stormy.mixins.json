@@ -1,7 +1,7 @@
 {
   "required": true,
   "compatibilityLevel": "JAVA_8",
-  "package": "me.tryfle.stormy.mixins",
+  "package": "dev.stormy.client.mixins",
   "mixins": [
     "EntityLivingBaseMixin",
     "EntityPlayerMixin",

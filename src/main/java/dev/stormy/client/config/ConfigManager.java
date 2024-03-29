@@ -3,7 +3,7 @@ package dev.stormy.client.config;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 
 import java.io.File;

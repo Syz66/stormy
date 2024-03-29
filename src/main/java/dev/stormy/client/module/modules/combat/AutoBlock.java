@@ -14,6 +14,7 @@ import net.weavemc.loader.api.event.RenderHandEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Mouse;
+
 public class AutoBlock extends Module {
 
     long lastClickTime = 0;

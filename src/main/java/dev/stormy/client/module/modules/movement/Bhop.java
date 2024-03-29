@@ -64,7 +64,7 @@ public class Bhop extends Module {
                 }
             case New:
                 boolean devZoomin = false;
-                devZoomin = mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() ||mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown();
+                devZoomin = mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown();
                 if (PlayerUtils.isPlayerInGame()) {
                     if (mc.thePlayer.onGround && !mc.thePlayer.isSneaking() && devZoomin && !mc.thePlayer.inWater) {
                         if (mc.thePlayer.motionX != 0 || mc.thePlayer.motionZ != 0) {

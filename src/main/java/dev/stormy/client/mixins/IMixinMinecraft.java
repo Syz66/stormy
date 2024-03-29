@@ -1,4 +1,4 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Timer;

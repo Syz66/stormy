@@ -7,7 +7,7 @@ import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import me.tryfle.stormy.events.UpdateEvent;
+import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;

@@ -1,6 +1,6 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
-import me.tryfle.stormy.events.DrawBlockHighlightEvent;
+import dev.stormy.client.events.DrawBlockHighlightEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

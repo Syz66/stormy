@@ -22,6 +22,7 @@ public class AntiVoid extends Module {
         this.registerSetting(fallDist = new SliderSetting("Fall Distance", 5.0D, 1.0D, 40.0D, 1.0D));
         this.registerSetting(AutoDisable = new TickSetting("AutoDisable", true));
     }
+
     @SuppressWarnings("unused")
     @SubscribeEvent
     public void antiVoid(TickEvent e) {
@@ -45,6 +46,6 @@ public class AntiVoid extends Module {
     }
 
     public enum modes {
-       NCP, Karhu
+        NCP, Karhu
     }
 }

@@ -1,6 +1,6 @@
 package dev.stormy.client.clickgui;
 
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import net.minecraft.client.gui.GuiScreen;
 import dev.stormy.client.clickgui.components.CategoryComponent;

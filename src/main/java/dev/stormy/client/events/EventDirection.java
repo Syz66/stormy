@@ -1,4 +1,4 @@
-package me.tryfle.stormy.events;
+package dev.stormy.client.events;
 
 public enum EventDirection {
     INCOMING, OUTGOING

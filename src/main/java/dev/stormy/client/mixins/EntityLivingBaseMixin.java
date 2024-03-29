@@ -1,6 +1,6 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
-import me.tryfle.stormy.events.LivingUpdateEvent;
+import dev.stormy.client.events.LivingUpdateEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.weavemc.loader.api.event.EventBus;
 import org.spongepowered.asm.mixin.Mixin;

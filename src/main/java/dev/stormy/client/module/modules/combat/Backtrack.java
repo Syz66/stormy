@@ -73,7 +73,8 @@ public class Backtrack extends Module {
                     return true;
                 }
                 return false;
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
             return false;
         });
     }
@@ -91,7 +92,8 @@ public class Backtrack extends Module {
                     PacketUtils.handle(timedPacket.packet(), false);
                     return true;
                 });
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         incomingPackets.clear();
     }

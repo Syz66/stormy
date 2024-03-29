@@ -1,6 +1,6 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
-import me.tryfle.stormy.events.MoveEvent;
+import dev.stormy.client.events.MoveEvent;
 import net.weavemc.loader.api.event.EventBus;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

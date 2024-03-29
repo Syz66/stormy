@@ -3,9 +3,6 @@
     "stormy.mixins.json"
   ],
   "entrypoints": [
-    "me.tryfle.stormy.Main"
-  ],
-  "hooks": [
-    "me.tryfle.stormy.hooks.CPSHook"
+    "dev.stormy.client.Main"
   ]
 }

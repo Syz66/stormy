@@ -13,27 +13,27 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import java.util.Iterator;
 
 public class ChestESP extends Module {
-   public ChestESP() {
-      super("ChestESP", ModuleCategory.Render, 0);
-   }
+    public ChestESP() {
+        super("ChestESP", ModuleCategory.Render, 0);
+    }
 
-   @SubscribeEvent
-   public void onRenderWorldLast(RenderWorldEvent e) {
-      if (PlayerUtils.isPlayerInGame()) {
-         Iterator<TileEntity> var3 = mc.theWorld.loadedTileEntityList.iterator();
+    @SubscribeEvent
+    public void onRenderWorldLast(RenderWorldEvent e) {
+        if (PlayerUtils.isPlayerInGame()) {
+            Iterator<TileEntity> var3 = mc.theWorld.loadedTileEntityList.iterator();
 
-         while(true) {
-            TileEntity te;
-            do {
-               if (!var3.hasNext()) {
-                  return;
-               }
+            while (true) {
+                TileEntity te;
+                do {
+                    if (!var3.hasNext()) {
+                        return;
+                    }
 
-               te = var3.next();
-            } while(!(te instanceof TileEntityChest) && !(te instanceof TileEntityEnderChest));
+                    te = var3.next();
+                } while (!(te instanceof TileEntityChest) && !(te instanceof TileEntityEnderChest));
 
-            Utils.HUD.re(te.getPos(), Theme.getMainColor().getRGB(), true);
-         }
-      }
-   }
+                Utils.HUD.re(te.getPos(), Theme.getMainColor().getRGB(), true);
+            }
+        }
+    }
 }

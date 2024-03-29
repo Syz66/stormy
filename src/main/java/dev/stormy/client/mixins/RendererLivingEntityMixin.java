@@ -1,6 +1,6 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
-import me.tryfle.stormy.events.RenderLabelEvent;
+import dev.stormy.client.events.RenderLabelEvent;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;

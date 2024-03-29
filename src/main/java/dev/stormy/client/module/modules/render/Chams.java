@@ -12,24 +12,24 @@ import static org.lwjgl.opengl.GL11.*;
 public class Chams extends Module {
 
 
-   public Chams() {
-      super("Chams", ModuleCategory.Render, 0);
-      this.registerSetting(new DescriptionSetting("Show players through walls."));
-   }
+    public Chams() {
+        super("Chams", ModuleCategory.Render, 0);
+        this.registerSetting(new DescriptionSetting("Show players through walls."));
+    }
 
-   @SubscribeEvent
-   public void onPreLivingRender(RenderLivingEvent.Pre e) {
-      if (e.getEntity() instanceof EntityPlayer) {
-         glEnable(GL_POLYGON_OFFSET_FILL);
-         glPolygonOffset(1.0F, -1100000.0F);
-      }
-   }
+    @SubscribeEvent
+    public void onPreLivingRender(RenderLivingEvent.Pre e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            glEnable(GL_POLYGON_OFFSET_FILL);
+            glPolygonOffset(1.0F, -1100000.0F);
+        }
+    }
 
-   @SubscribeEvent
-   public void onPostLivingRender(RenderLivingEvent.Post e) {
-      if (e.getEntity() instanceof EntityPlayer) {
-         glDisable(GL_POLYGON_OFFSET_FILL);
-         glPolygonOffset(1.0F, 1100000.0F);
-      }
-   }
+    @SubscribeEvent
+    public void onPostLivingRender(RenderLivingEvent.Post e) {
+        if (e.getEntity() instanceof EntityPlayer) {
+            glDisable(GL_POLYGON_OFFSET_FILL);
+            glPolygonOffset(1.0F, 1100000.0F);
+        }
+    }
 }

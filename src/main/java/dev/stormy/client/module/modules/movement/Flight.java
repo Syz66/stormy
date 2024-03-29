@@ -61,7 +61,8 @@ public class Flight extends Module {
                     }
                     if (mc.thePlayer.fallDistance > 3.0F) {
                         MoveUtils.motionMult(1.0105F);
-                    };
+                    }
+                    ;
                     mc.thePlayer.speedInAir = (float) (MathUtils.randomInt(1, 1.4) * 2) / 100;
                     if (ascend.isToggled() && mc.gameSettings.keyBindJump.isKeyDown()) {
                         mc.thePlayer.motionY += 1;

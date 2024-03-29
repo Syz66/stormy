@@ -8,7 +8,7 @@ import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.ItemUtils;
 import dev.stormy.client.utils.player.PotionUtils;
-import me.tryfle.stormy.events.UpdateEvent;
+import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.enchantment.Enchantment;

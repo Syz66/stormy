@@ -1,6 +1,6 @@
 package dev.stormy.client.config;
 
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.utils.Utils;
 import dev.stormy.client.clickgui.components.CategoryComponent;
 import dev.stormy.client.module.modules.client.ArrayListModule;

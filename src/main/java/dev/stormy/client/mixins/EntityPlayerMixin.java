@@ -1,4 +1,4 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
@@ -18,7 +18,7 @@ import net.weavemc.loader.api.event.EventBus;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import me.tryfle.stormy.events.HitSlowDownEvent;
+import dev.stormy.client.events.HitSlowDownEvent;
 
 @Mixin(priority = 995, value = EntityPlayer.class)
 public abstract class EntityPlayerMixin extends EntityLivingBase {

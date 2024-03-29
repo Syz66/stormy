@@ -1,8 +1,8 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
 import com.mojang.authlib.GameProfile;
-import me.tryfle.stormy.events.SlowdownEvent;
-import me.tryfle.stormy.events.UpdateEvent;
+import dev.stormy.client.events.SlowdownEvent;
+import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.AbstractClientPlayer;

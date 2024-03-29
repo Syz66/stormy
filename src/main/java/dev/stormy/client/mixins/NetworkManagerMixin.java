@@ -1,7 +1,7 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
 import io.netty.channel.ChannelHandlerContext;
-import me.tryfle.stormy.events.PacketEvent;
+import dev.stormy.client.events.PacketEvent;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.weavemc.loader.api.event.EventBus;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import me.tryfle.stormy.events.EventDirection;
+import dev.stormy.client.events.EventDirection;
 
 
 @Mixin(priority = 995, value = NetworkManager.class)

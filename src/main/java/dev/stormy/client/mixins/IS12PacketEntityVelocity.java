@@ -1,4 +1,4 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;

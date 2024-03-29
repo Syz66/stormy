@@ -68,6 +68,7 @@ public class AutoClicker extends Module {
         }
         return false;
     }
+
     @SubscribeEvent
     public void onRender(RenderHandEvent e) {
         randomizer();
@@ -97,8 +98,9 @@ public class AutoClicker extends Module {
 
     public void randomizer() {
         double random = Utils.Java.randomInt(0, 4);
-         shouldClick = random >= 0.5;
+        shouldClick = random >= 0.5;
     }
+
     public void finishDelay() {
         long currentTime = System.currentTimeMillis();
         int newdelay = Utils.Java.randomInt(30, 120);

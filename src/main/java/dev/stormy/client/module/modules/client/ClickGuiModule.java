@@ -1,10 +1,9 @@
 package dev.stormy.client.module.modules.client;
 
 import dev.stormy.client.clickgui.ClickGui;
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;

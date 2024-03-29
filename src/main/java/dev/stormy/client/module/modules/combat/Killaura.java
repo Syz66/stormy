@@ -8,7 +8,7 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import me.tryfle.stormy.events.UpdateEvent;
+import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
@@ -46,6 +46,7 @@ public class Killaura extends Module {
     public void onDisable() {
         target = Optional.empty();
     }
+
     @SubscribeEvent
     public void setTarget(TickEvent.Pre e) {
         if (PlayerUtils.isPlayerInGame()) {
@@ -56,14 +57,15 @@ public class Killaura extends Module {
                     .findFirst() : Optional.empty();
         }
     }
+
     public boolean aBooleanCheck() {
         if (!whenLooking.isToggled()) return false;
         MovingObjectPosition result = mc.objectMouseOver;
         if (result != null && result.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY && result.entityHit instanceof EntityPlayer targetPlayer) {
             return whenLooking.isToggled() && PlayerUtils.lookingAtPlayer(mc.thePlayer, targetPlayer, range.getInput() + 1);
-        }
-        else return false;
+        } else return false;
     }
+
     @SubscribeEvent
     public void experiMental(UpdateEvent.Pre e) {
         if (target.isEmpty() || !PlayerUtils.isPlayerInGame()) {
@@ -82,6 +84,7 @@ public class Killaura extends Module {
             }
         }
     }
+
     public void finishDelay() {
         long currentTime = System.currentTimeMillis();
         int newdelay = Utils.Java.randomInt(20, 70);
@@ -92,6 +95,7 @@ public class Killaura extends Module {
             delaying = false;
         }
     }
+
     @SubscribeEvent
     public void onRender(RenderHandEvent e) {
         if (((Mouse.isButtonDown(1) && shouldBlock.isToggled()) || alwaysAB.isToggled()) && PlayerUtils.isPlayerHoldingWeapon() && isAttacking && mc.currentScreen == null) {
@@ -108,6 +112,7 @@ public class Killaura extends Module {
             }
         }
     }
+
     @SubscribeEvent
     public void ESP(RenderWorldEvent e) {
         if (targetESP.isToggled() && target.isPresent()) {
@@ -115,6 +120,7 @@ public class Killaura extends Module {
             Utils.HUD.drawBoxAroundEntity(target.get(), 2, 0.0D, 0.0D, Theme.getMainColor().getRGB(), true);
         }
     }
+
     @SubscribeEvent
     public void unblockthings(TickEvent e) {
         if (!PlayerUtils.isPlayerInGame()) return;
@@ -127,6 +133,7 @@ public class Killaura extends Module {
             }
         }
     }
+
     @SubscribeEvent
     public void onClientTick(RenderWorldEvent e) {
         if (PlayerUtils.isPlayerInGame() && target.isPresent() && mc.currentScreen == null && rots.isToggled() && !mc.thePlayer.isEating()) {

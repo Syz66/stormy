@@ -1,12 +1,12 @@
 package dev.stormy.client.module.modules.combat;
 
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
-import me.tryfle.stormy.events.LivingUpdateEvent;
+import dev.stormy.client.events.LivingUpdateEvent;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;

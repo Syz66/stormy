@@ -1,6 +1,6 @@
-package me.tryfle.stormy.mixins;
+package dev.stormy.client.mixins;
 
-import dev.stormy.client.main.Stormy;
+import dev.stormy.client.Stormy;
 import dev.stormy.client.module.modules.combat.NoHitDelay;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

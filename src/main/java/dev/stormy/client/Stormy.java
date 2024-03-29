@@ -1,4 +1,4 @@
-package dev.stormy.client.main;
+package dev.stormy.client;
 
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.client.Minecraft;
@@ -11,7 +11,6 @@ import dev.stormy.client.config.ConfigManager;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.ModuleManager;
 import dev.stormy.client.utils.game.MouseManager;
-import dev.stormy.client.utils.Utils;
 
 public class Stormy {
 
