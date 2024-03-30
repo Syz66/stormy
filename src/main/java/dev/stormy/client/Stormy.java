@@ -12,8 +12,8 @@ import dev.stormy.client.module.Module;
 import dev.stormy.client.module.ModuleManager;
 import dev.stormy.client.utils.game.MouseManager;
 
+// TODO: Fix naming convention
 public class Stormy {
-
    public static boolean debugger = false;
    public static ConfigManager configManager;
    public static ClientConfig clientConfig;

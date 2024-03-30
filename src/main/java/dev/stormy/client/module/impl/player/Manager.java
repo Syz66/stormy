@@ -19,8 +19,10 @@ import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.weavemc.loader.api.event.SubscribeEvent;
-//skidded from ravenweave tytyty
 
+/**
+ * @author syz66
+ */
 public class Manager extends Module {
     public static DoubleSliderSetting delay;
     public static TickSetting legit, keepTools;

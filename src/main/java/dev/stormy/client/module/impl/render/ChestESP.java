@@ -12,6 +12,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 
 import java.util.Iterator;
 
+// TODO: Rewrite
 public class ChestESP extends Module {
     public ChestESP() {
         super("ChestESP", ModuleCategory.Render, 0);

@@ -7,6 +7,7 @@ import dev.stormy.client.utils.packet.TimedPacket;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+// TODO: Add logic
 public class FakeLag extends Module {
     public static SliderSetting spoofms;
 

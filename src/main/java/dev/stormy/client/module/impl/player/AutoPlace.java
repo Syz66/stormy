@@ -20,6 +20,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Mouse;
 
+// TODO: Clean up
 public class AutoPlace extends Module {
     public static SliderSetting frameDelay;
     private long l = 0L;

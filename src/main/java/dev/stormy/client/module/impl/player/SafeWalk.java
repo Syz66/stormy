@@ -17,6 +17,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Keyboard;
 
+// TODO: Rewrite
 public class SafeWalk extends Module {
     public static TickSetting blocksOnly, shiftOnJump;
     public static TickSetting onHold, lookDown;
