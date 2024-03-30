@@ -2,7 +2,7 @@ package dev.stormy.client.utils.client;
 
 import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
-import dev.stormy.client.module.modules.combat.AutoClicker;
+import dev.stormy.client.module.impl.combat.AutoClicker;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.utils.IMethods;
 import dev.stormy.client.utils.asm.ReflectionUtils;

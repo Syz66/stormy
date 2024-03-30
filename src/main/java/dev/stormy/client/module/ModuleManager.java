@@ -1,14 +1,14 @@
 package dev.stormy.client.module;
 
-import dev.stormy.client.module.modules.client.AntiBot;
-import dev.stormy.client.module.modules.client.ClickGuiModule;
-import dev.stormy.client.module.modules.combat.*;
-import dev.stormy.client.module.modules.movement.*;
-import dev.stormy.client.module.modules.player.*;
-import dev.stormy.client.module.modules.render.*;
+import dev.stormy.client.module.impl.client.AntiBot;
+import dev.stormy.client.module.impl.client.ClickGuiModule;
+import dev.stormy.client.module.impl.combat.*;
+import dev.stormy.client.module.impl.movement.*;
+import dev.stormy.client.module.impl.player.*;
+import dev.stormy.client.module.impl.render.*;
 import net.minecraft.client.gui.FontRenderer;
-import dev.stormy.client.module.modules.client.ArrayListModule;
-import dev.stormy.client.module.modules.movement.Timer;
+import dev.stormy.client.module.impl.client.ArrayListModule;
+import dev.stormy.client.module.impl.movement.Timer;
 import dev.stormy.client.utils.Utils;
 
 import java.util.ArrayList;

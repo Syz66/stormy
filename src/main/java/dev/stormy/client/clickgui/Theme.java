@@ -1,6 +1,6 @@
 package dev.stormy.client.clickgui;
 
-import dev.stormy.client.module.modules.client.ClickGuiModule;
+import dev.stormy.client.module.impl.client.ClickGuiModule;
 
 import java.awt.*;
 

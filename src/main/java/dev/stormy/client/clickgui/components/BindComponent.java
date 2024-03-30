@@ -5,7 +5,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import dev.stormy.client.clickgui.Component;
 import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.module.modules.client.ClickGuiModule;
+import dev.stormy.client.module.impl.client.ClickGuiModule;
 
 public class BindComponent implements Component {
     private boolean isBinding;

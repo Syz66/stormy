@@ -21,10 +21,10 @@ public class RenderUtils {
     public static void drawRoundedRect(float x, float y, float x1, float y1, final float radius, final int color, boolean[] round) {
         GL11.glPushAttrib(0);
         GL11.glScaled(0.5, 0.5, 0.5);
-        x *= 2.0;
-        y *= 2.0;
-        x1 *= 2.0;
-        y1 *= 2.0;
+        x *= 2.0f;
+        y *= 2.0f;
+        x1 *= 2.0f;
+        y1 *= 2.0f;
         GL11.glEnable(3042);
         GL11.glDisable(3553);
         GL11.glEnable(2848);
@@ -79,10 +79,10 @@ public class RenderUtils {
     public static void drawRoundedOutline(float x, float y, float x1, float y1, final float radius, final float borderSize, final int color, boolean[] drawCorner) {
         GL11.glPushAttrib(0);
         GL11.glScaled(0.5, 0.5, 0.5);
-        x *= 2.0;
-        y *= 2.0;
-        x1 *= 2.0;
-        y1 *= 2.0;
+        x *= 2.0f;
+        y *= 2.0f;
+        x1 *= 2.0f;
+        y1 *= 2.0f;
         GL11.glEnable(3042);
         GL11.glDisable(3553);
         setColor(color);

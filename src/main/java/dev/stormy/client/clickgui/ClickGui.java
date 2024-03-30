@@ -4,7 +4,7 @@ import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import net.minecraft.client.gui.GuiScreen;
 import dev.stormy.client.clickgui.components.CategoryComponent;
-import dev.stormy.client.module.modules.client.ClickGuiModule;
+import dev.stormy.client.module.impl.client.ClickGuiModule;
 
 import java.util.ArrayList;
 import java.util.Iterator;

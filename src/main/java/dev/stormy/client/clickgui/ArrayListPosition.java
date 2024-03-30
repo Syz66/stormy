@@ -4,7 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import dev.stormy.client.module.modules.client.ArrayListModule;
+import dev.stormy.client.module.impl.client.ArrayListModule;
 import dev.stormy.client.utils.Utils;
 
 import java.awt.*;
