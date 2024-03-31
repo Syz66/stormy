@@ -7,9 +7,10 @@ import java.util.Random;
 /**
  * @author sassan
  * 23.11.2023, 2023
- * hi sassan
  */
 public class MathUtils implements IMethods {
+    public static Random rand = new Random();
+
     public static Random rand() {
         return rand;
     }
