@@ -29,6 +29,8 @@ public class Theme {
                 return new Color(155, 89, 182);
             case "Lily":
                 return new Color(76, 56, 108);
+            case "Syz":
+                return new Color(118, 105, 201);
             default: // UNUSED
                 return new Color(255, 255, 255);
         }
