@@ -1,11 +1,11 @@
 package dev.stormy.client.module.impl.movement;
 
-import net.weavemc.loader.api.event.SubscribeEvent;
-import net.weavemc.loader.api.event.TickEvent;
 import dev.stormy.client.clickgui.ClickGui;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
+import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.TickEvent;
 
 public class Timer extends Module {
     public static SliderSetting speed;

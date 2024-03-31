@@ -1,11 +1,11 @@
 package dev.stormy.client.module.impl.render;
 
+import dev.stormy.client.events.RenderLabelEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.impl.client.AntiBot;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
-import dev.stormy.client.events.RenderLabelEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

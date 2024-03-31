@@ -2,7 +2,10 @@ package dev.stormy.client.module.impl.combat;
 
 
 import dev.stormy.client.Stormy;
+import dev.stormy.client.module.Module;
+import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
+import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.entity.Entity;
@@ -14,11 +17,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.weavemc.loader.api.event.MouseEvent;
-import org.lwjgl.input.Mouse;
-import dev.stormy.client.module.Module;
-import dev.stormy.client.module.setting.impl.DescriptionSetting;
-import dev.stormy.client.module.setting.impl.TickSetting;
 import net.weavemc.loader.api.event.SubscribeEvent;
+import org.lwjgl.input.Mouse;
 
 import java.util.List;
 import java.util.Random;

@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.clickgui.Theme;
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -8,22 +9,24 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.utils.render.Render3DUtils;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.weavemc.loader.api.event.*;
+import net.weavemc.loader.api.event.RenderHandEvent;
+import net.weavemc.loader.api.event.RenderWorldEvent;
+import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.TickEvent;
 import org.lwjgl.input.Mouse;
 
 import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class Killaura extends Module {
-    static Optional<EntityPlayer> target = Optional.empty();
     public static SliderSetting range, frequency, hurtTimeAmt, rotRand;
     public static TickSetting shouldBlock, targetESP, testSetting, alwaysAB, rots, whenLooking;
+    static Optional<EntityPlayer> target = Optional.empty();
     public TimerUtils timer = new TimerUtils();
     public boolean delaying, isAttacking = false;
     long lastClickTime = 0;
@@ -49,7 +52,7 @@ public class Killaura extends Module {
     }
 
     @SubscribeEvent
-    public void setTarget(TickEvent.Pre e) {
+    public void onTickPre(TickEvent.Pre ev) {
         if (PlayerUtils.isPlayerInGame()) {
             target = mc.theWorld != null
                     ? mc.theWorld.playerEntities.stream()
@@ -59,16 +62,8 @@ public class Killaura extends Module {
         }
     }
 
-    public boolean aBooleanCheck() {
-        if (!whenLooking.isToggled()) return false;
-        MovingObjectPosition result = mc.objectMouseOver;
-        if (result != null && result.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY && result.entityHit instanceof EntityPlayer targetPlayer) {
-            return whenLooking.isToggled() && PlayerUtils.lookingAtPlayer(mc.thePlayer, targetPlayer, range.getInput() + 1);
-        } else return false;
-    }
-
     @SubscribeEvent
-    public void experiMental(UpdateEvent.Pre e) {
+    public void onUpdatePre(UpdateEvent.Pre ev) {
         if (target.isEmpty() || !PlayerUtils.isPlayerInGame()) {
             isAttacking = false;
             return;
@@ -76,7 +71,7 @@ public class Killaura extends Module {
         if (timer.hasReached(1000 / frequency.getInput() + MathUtils.randomInt(-3, 3)) && mc.thePlayer.hurtTime < hurtTimeAmt.getInput() && mc.currentScreen == null) {
             if (target.isPresent()) {
                 if (mc.thePlayer.isBlocking() || mc.thePlayer.isEating()) return;
-                if (whenLooking.isToggled() && !aBooleanCheck()) return;
+                if (whenLooking.isToggled() && !lookingAt()) return;
                 if (target.get().deathTime > 0) return;
                 mc.thePlayer.swingItem();
                 mc.playerController.attackEntity(mc.thePlayer, target.get());
@@ -86,19 +81,8 @@ public class Killaura extends Module {
         }
     }
 
-    public void finishDelay() {
-        long currentTime = System.currentTimeMillis();
-        int newdelay = MathUtils.randomInt(20, 70);
-        if (currentTime - lastClickTime >= newdelay) {
-            lastClickTime = currentTime;
-            KeyBinding.setKeyBindState(rmb, false);
-            KeyBinding.onTick(rmb);
-            delaying = false;
-        }
-    }
-
     @SubscribeEvent
-    public void onRender(RenderHandEvent e) {
+    public void onRender(RenderHandEvent ev) {
         if (((Mouse.isButtonDown(1) && shouldBlock.isToggled()) || alwaysAB.isToggled()) && PlayerUtils.isPlayerHoldingWeapon() && isAttacking && mc.currentScreen == null) {
             long currentTime = System.currentTimeMillis();
             int delay = 1000 / (int) frequency.getInput() + MathUtils.randomInt(-3, 3) - 4;
@@ -115,7 +99,7 @@ public class Killaura extends Module {
     }
 
     @SubscribeEvent
-    public void ESP(RenderWorldEvent e) {
+    public void onRenderWorld(RenderWorldEvent ev) {
         if (targetESP.isToggled() && target.isPresent()) {
             Render3DUtils.drawEntity(target.get(), 1, Theme.getMainColor().getRGB(), true);
             Render3DUtils.drawEntity(target.get(), 2, Theme.getMainColor().getRGB(), true);
@@ -123,7 +107,7 @@ public class Killaura extends Module {
     }
 
     @SubscribeEvent
-    public void unblockthings(TickEvent e) {
+    public void onTick(TickEvent ev) {
         if (!PlayerUtils.isPlayerInGame()) return;
         if (mc.thePlayer.isBlocking() && PlayerUtils.isPlayerHoldingWeapon() && !Mouse.isButtonDown(1) && mc.currentScreen == null && !isAttacking) {
             long neow = System.currentTimeMillis();
@@ -136,7 +120,7 @@ public class Killaura extends Module {
     }
 
     @SubscribeEvent
-    public void onClientTick(RenderWorldEvent e) {
+    public void onUpdate(UpdateEvent ev) {
         if (PlayerUtils.isPlayerInGame() && target.isPresent() && mc.currentScreen == null && rots.isToggled() && !mc.thePlayer.isEating()) {
             double deltaX = target.get().posX - mc.thePlayer.posX;
             double deltaY = target.get().posY + target.get().getEyeHeight() - mc.thePlayer.posY - mc.thePlayer.getEyeHeight();
@@ -148,6 +132,25 @@ public class Killaura extends Module {
 
             mc.thePlayer.rotationYaw = yaw;
             mc.thePlayer.rotationPitch = pitch;
+        }
+    }
+
+    public boolean lookingAt() {
+        if (!whenLooking.isToggled()) return false;
+        MovingObjectPosition result = mc.objectMouseOver;
+        if (result != null && result.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY && result.entityHit instanceof EntityPlayer targetPlayer) {
+            return whenLooking.isToggled() && PlayerUtils.lookingAtPlayer(mc.thePlayer, targetPlayer, range.getInput() + 1);
+        } else return false;
+    }
+
+    public void finishDelay() {
+        long currentTime = System.currentTimeMillis();
+        int newdelay = MathUtils.randomInt(20, 70);
+        if (currentTime - lastClickTime >= newdelay) {
+            lastClickTime = currentTime;
+            KeyBinding.setKeyBindState(rmb, false);
+            KeyBinding.onTick(rmb);
+            delaying = false;
         }
     }
 }

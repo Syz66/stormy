@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.player;
 
 import dev.stormy.client.Stormy;
+import dev.stormy.client.events.DrawBlockHighlightEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.utils.client.ClientUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.DrawBlockHighlightEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.init.Blocks;

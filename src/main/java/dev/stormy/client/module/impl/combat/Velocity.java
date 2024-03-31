@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
-import dev.stormy.client.module.setting.impl.SliderSetting;
-import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.events.PacketEvent;
 import dev.stormy.client.mixins.IS12PacketEntityVelocity;
-import net.weavemc.loader.api.event.SubscribeEvent;
+import dev.stormy.client.module.Module;
+import dev.stormy.client.module.setting.impl.ComboSetting;
+import dev.stormy.client.module.setting.impl.SliderSetting;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
+import net.weavemc.loader.api.event.SubscribeEvent;
 
 @SuppressWarnings("unused")
 public class Velocity extends Module {

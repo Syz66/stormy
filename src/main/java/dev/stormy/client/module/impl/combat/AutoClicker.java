@@ -13,9 +13,12 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
-import net.weavemc.loader.api.event.*;
-import org.lwjgl.input.Mouse;
 import net.minecraft.util.MovingObjectPosition;
+import net.weavemc.loader.api.event.EventBus;
+import net.weavemc.loader.api.event.MouseEvent;
+import net.weavemc.loader.api.event.RenderHandEvent;
+import net.weavemc.loader.api.event.SubscribeEvent;
+import org.lwjgl.input.Mouse;
 
 
 @SuppressWarnings("unused")
@@ -23,12 +26,11 @@ public class AutoClicker extends Module {
     public static TickSetting breakBlocks, hitSelect;
     public static SliderSetting leftCPS;
     public boolean shouldClick, breakHeld = false;
+    public boolean delaying = false;
     TimerUtils t = new TimerUtils();
     long lastClickTime = 0;
     int lmb = mc.gameSettings.keyBindAttack.getKeyCode();
     int delay = 0;
-
-    public boolean delaying = false;
 
     public AutoClicker() {
         super("AutoClicker", ModuleCategory.Combat, 0);

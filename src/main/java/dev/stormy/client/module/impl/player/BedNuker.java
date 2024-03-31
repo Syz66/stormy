@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
 import dev.stormy.client.clickgui.Theme;
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -8,7 +9,6 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.render.Render3DUtils;
 import dev.stormy.client.utils.world.DistanceUtils;
 import dev.stormy.client.utils.world.WorldUtils;
-import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.block.BlockBed;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;

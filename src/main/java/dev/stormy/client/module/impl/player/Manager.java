@@ -1,5 +1,6 @@
 package dev.stormy.client.module.impl.player;
 
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -8,7 +9,6 @@ import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.ItemUtils;
 import dev.stormy.client.utils.player.PotionUtils;
-import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.enchantment.Enchantment;
@@ -28,7 +28,10 @@ public class Manager extends Module {
     public static TickSetting legit, keepTools;
     public static SliderSetting swordSlot, blockSlot;
     public static int pickaxeSlotInt, axeSlotInt, shovelSlotInt, potionSlotInt, foodSlotInt;
-
+    private final TimerUtils stopwatch = new TimerUtils();
+    private int chestTicks;
+    private boolean moved, open;
+    private long nextClick;
     public Manager() {
         super("Manager", ModuleCategory.Player, 0);
         this.registerSetting(legit = new TickSetting("Legit", true));
@@ -38,10 +41,25 @@ public class Manager extends Module {
         this.registerSetting(keepTools = new TickSetting("Keep Tools", true));
     }
 
-    private final TimerUtils stopwatch = new TimerUtils();
-    private int chestTicks;
-    private boolean moved, open;
-    private long nextClick;
+    public static void getSlots(int int1, int int2) {
+        int[] inventorySlots = new int[5];
+
+        for (int i = 1; i <= 9; i++) {
+            if (i != int1 && i != int2) {
+                inventorySlots[0] = i;
+                inventorySlots[1] = i;
+                inventorySlots[2] = i;
+                inventorySlots[3] = i;
+                inventorySlots[4] = i;
+            }
+        }
+
+        pickaxeSlotInt = inventorySlots[0];
+        axeSlotInt = inventorySlots[1];
+        shovelSlotInt = inventorySlots[2];
+        potionSlotInt = inventorySlots[3];
+        foodSlotInt = inventorySlots[4];
+    }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
@@ -328,8 +346,6 @@ public class Manager extends Module {
         }
     }
 
-    ;
-
     @Override
     public void onDisable() {
         if (this.canOpenInventory()) {
@@ -445,25 +461,5 @@ public class Manager extends Module {
         }
 
         return slot;
-    }
-
-    public static void getSlots(int int1, int int2) {
-        int[] inventorySlots = new int[5];
-
-        for (int i = 1; i <= 9; i++) {
-            if (i != int1 && i != int2) {
-                inventorySlots[0] = i;
-                inventorySlots[1] = i;
-                inventorySlots[2] = i;
-                inventorySlots[3] = i;
-                inventorySlots[4] = i;
-            }
-        }
-
-        pickaxeSlotInt = inventorySlots[0];
-        axeSlotInt = inventorySlots[1];
-        shovelSlotInt = inventorySlots[2];
-        potionSlotInt = inventorySlots[3];
-        foodSlotInt = inventorySlots[4];
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 
-// TODO: Clean
+// TODO: Clean up
 public class FastPlace extends Module {
     public static SliderSetting delaySlider;
     public static TickSetting blockOnly;
@@ -22,7 +22,7 @@ public class FastPlace extends Module {
     }
 
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.Post event) {
+    public void onTick(TickEvent.Post ev) {
         if (PlayerUtils.isPlayerInGame() && mc.inGameHasFocus) {
             if (blockOnly.isToggled()) {
                 ItemStack item = mc.thePlayer.getHeldItem();

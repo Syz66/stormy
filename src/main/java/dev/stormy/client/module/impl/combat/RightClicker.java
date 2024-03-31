@@ -18,11 +18,10 @@ public class RightClicker extends Module {
     public static SliderSetting rCPS;
     public static TickSetting noConsumables, noSword, noBow, noRod;
     public boolean shouldClick = false;
+    public boolean delaying = false;
     long lastClickTime = 0;
     long wow = 0;
     int rmb = mc.gameSettings.keyBindUseItem.getKeyCode();
-
-    public boolean delaying = false;
 
     public RightClicker() {
         super("RightClicker", ModuleCategory.Combat, 0);

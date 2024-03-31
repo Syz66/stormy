@@ -12,8 +12,8 @@ import net.weavemc.loader.api.event.TickEvent;
 public class AntiVoid extends Module {
 
     public static ComboSetting<modes> mode;
-    public final SliderSetting fallDist;
     public static TickSetting AutoDisable;
+    public final SliderSetting fallDist;
 
     public AntiVoid() {
         super("AntiVoid", ModuleCategory.Movement, 0);

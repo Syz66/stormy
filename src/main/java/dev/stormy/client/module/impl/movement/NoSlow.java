@@ -1,5 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
+import dev.stormy.client.events.SlowdownEvent;
+import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -7,14 +9,12 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.SlowdownEvent;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.weavemc.loader.api.event.PacketEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
-import dev.stormy.client.module.Module;
 import net.weavemc.loader.api.event.TickEvent;
 
 @SuppressWarnings("unused")
@@ -22,10 +22,10 @@ public class NoSlow extends Module {
     public static SliderSetting speed;
     public static TickSetting autosprint, noweapons, noconsumables;
     public static ComboSetting<modes> mode;
-    private TimerUtils timer = new TimerUtils();
+    public boolean shouldFinishBlock = false;
     int rmb = mc.gameSettings.keyBindUseItem.getKeyCode();
     int sprint = mc.gameSettings.keyBindSprint.getKeyCode();
-    public boolean shouldFinishBlock = false;
+    private final TimerUtils timer = new TimerUtils();
 
     public NoSlow() {
         super("NoSlow", ModuleCategory.Movement, 0);
@@ -35,6 +35,12 @@ public class NoSlow extends Module {
         this.registerSetting(noweapons = new TickSetting("Blacklist Weapons", false));
         this.registerSetting(noconsumables = new TickSetting("Blacklist Consumables", false));
         this.registerSetting(mode = new ComboSetting<>("Mode", modes.Regular));
+    }
+
+    public static boolean consumableCheck() {
+        if (mc.thePlayer.getHeldItem() != null) {
+            return noconsumables.isToggled() && (mc.thePlayer.getHeldItem().getItem() instanceof ItemFood || mc.thePlayer.getHeldItem().getItem() instanceof ItemPotion);
+        } else return false;
     }
 
     @SubscribeEvent
@@ -65,12 +71,6 @@ public class NoSlow extends Module {
             KeyBinding.onTick(rmb);
             timer.reset();
         }
-    }
-
-    public static boolean consumableCheck() {
-        if (mc.thePlayer.getHeldItem() != null) {
-            return noconsumables.isToggled() && (mc.thePlayer.getHeldItem().getItem() instanceof ItemFood || mc.thePlayer.getHeldItem().getItem() instanceof ItemPotion);
-        } else return false;
     }
 
     @SubscribeEvent

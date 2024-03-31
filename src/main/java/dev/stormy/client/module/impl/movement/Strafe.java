@@ -1,11 +1,11 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.setting.impl.DescriptionSetting;
+import dev.stormy.client.events.MoveEvent;
 import dev.stormy.client.module.Module;
+import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.MoveUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.MoveEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
 public class Strafe extends Module {

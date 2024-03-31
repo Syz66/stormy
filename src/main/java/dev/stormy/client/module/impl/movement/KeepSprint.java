@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.movement;
 
 import dev.stormy.client.Stormy;
+import dev.stormy.client.events.HitSlowDownEvent;
+import dev.stormy.client.module.Module;
 import dev.stormy.client.module.impl.combat.Reach;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.module.Module;
-import dev.stormy.client.events.HitSlowDownEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
 public class KeepSprint extends Module {

@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.Stormy;
+import dev.stormy.client.events.LivingUpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.LivingUpdateEvent;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
@@ -34,9 +34,25 @@ public class AimAssist extends Module {
         this.registerSetting(breakBlocks = new TickSetting("Break Blocks", true));
     }
 
+    public static boolean fov(Entity entity, float fov) {
+        fov = (float) ((double) fov * 0.5D);
+        double v = ((double) (mc.thePlayer.rotationYaw - m(entity)) % 360.0D + 540.0D) % 360.0D - 180.0D;
+        return v > 0.0D && v < (double) fov || (double) (-fov) < v && v < 0.0D;
+    }
+
+    public static double n(Entity en) {
+        return ((double) (mc.thePlayer.rotationYaw - m(en)) % 360.0D + 540.0D) % 360.0D - 180.0D;
+    }
+
+    public static float m(Entity ent) {
+        double x = ent.posX - mc.thePlayer.posX;
+        double z = ent.posZ - mc.thePlayer.posZ;
+        double yaw = Math.atan2(x, z) * 57.2957795D;
+        return (float) (yaw * -1.0D);
+    }
 
     @SubscribeEvent
-    public void onUpdateCenter(LivingUpdateEvent e) {
+    public void onLivingUpdate(LivingUpdateEvent ev) {
         if (mc.thePlayer == null
                 || mc.currentScreen != null
                 || !mc.inGameHasFocus
@@ -72,23 +88,6 @@ public class AimAssist extends Module {
             return en;
         }
         return null;
-    }
-
-    public static boolean fov(Entity entity, float fov) {
-        fov = (float) ((double) fov * 0.5D);
-        double v = ((double) (mc.thePlayer.rotationYaw - m(entity)) % 360.0D + 540.0D) % 360.0D - 180.0D;
-        return v > 0.0D && v < (double) fov || (double) (-fov) < v && v < 0.0D;
-    }
-
-    public static double n(Entity en) {
-        return ((double) (mc.thePlayer.rotationYaw - m(en)) % 360.0D + 540.0D) % 360.0D - 180.0D;
-    }
-
-    public static float m(Entity ent) {
-        double x = ent.posX - mc.thePlayer.posX;
-        double z = ent.posZ - mc.thePlayer.posZ;
-        double yaw = Math.atan2(x, z) * 57.2957795D;
-        return (float) (yaw * -1.0D);
     }
 
     public boolean breakBlock() {

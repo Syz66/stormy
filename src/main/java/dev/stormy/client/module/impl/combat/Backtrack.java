@@ -9,7 +9,10 @@ import dev.stormy.client.utils.packet.TimedPacket;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.Packet;
-import net.weavemc.loader.api.event.*;
+import net.weavemc.loader.api.event.PacketEvent;
+import net.weavemc.loader.api.event.RenderHandEvent;
+import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.TickEvent;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -17,9 +20,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings("unused")
 // TODO: Rewrite
 public class Backtrack extends Module {
+    public static final ConcurrentLinkedQueue<TimedPacket> incomingPackets = new ConcurrentLinkedQueue<>();
     public static SliderSetting spoofms, range;
     public static TickSetting useRange;
-    public static final ConcurrentLinkedQueue<TimedPacket> incomingPackets = new ConcurrentLinkedQueue<>();
     private Optional<EntityPlayer> target = Optional.empty();
 
     public Backtrack() {
@@ -31,40 +34,32 @@ public class Backtrack extends Module {
     }
 
     @SubscribeEvent
-    public void setTarget(TickEvent.Pre e) {
+    public void onTick(TickEvent.Pre ev) {
         if (PlayerUtils.isPlayerInGame()) {
             target = mc.theWorld != null
                     ? mc.theWorld.playerEntities.stream()
                     .filter(player -> player.getEntityId() != mc.thePlayer.getEntityId() &&
                             player.getDistanceToEntity(mc.thePlayer) <= range.getInput())
                     .findFirst() : Optional.empty();
+        } else {
+            this.disable();
         }
     }
 
     @SubscribeEvent
-    public void onTickDisabler(TickEvent e) {
-        if (!PlayerUtils.isPlayerInGame()) this.disable();
-    }
-
-    public int getSpoofMS() {
-        if (target.isPresent()) return (int) spoofms.getInput();
-        else return 0;
-    }
-
-    @SubscribeEvent
-    public void pingSpooferIncoming(PacketEvent.Receive e) {
+    public void onPacket(PacketEvent.Receive ev) {
         if (PlayerUtils.isPlayerInGame() && target.isPresent()) {
             try {
-                Packet<?> packet = e.getPacket();
+                Packet<?> packet = ev.getPacket();
                 incomingPackets.add(new TimedPacket(packet, System.currentTimeMillis()));
-                e.setCancelled(true);
+                ev.setCancelled(true);
             } catch (Exception ignored) {
             }
         }
     }
 
     @SubscribeEvent
-    public void packetHandler(RenderHandEvent e) {
+    public void onRenderHand(RenderHandEvent ev) {
         if (!PlayerUtils.isPlayerInGame()) return;
         final long time = System.currentTimeMillis();
         incomingPackets.removeIf(timedPacket -> {
@@ -78,6 +73,11 @@ public class Backtrack extends Module {
             }
             return false;
         });
+    }
+
+    public int getSpoofMS() {
+        if (target.isPresent()) return (int) spoofms.getInput();
+        else return 0;
     }
 
     @Override

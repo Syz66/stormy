@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.player;
 
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.ItemUtils;
-import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.ContainerChest;
@@ -18,7 +18,11 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 public class Stealer extends Module {
     public static DoubleSliderSetting delay;
     public static TickSetting menuCheck, ignoreTrash;
-
+    private static boolean userInterface;
+    private final TimerUtils stopwatch = new TimerUtils();
+    private long nextClick;
+    private int lastClick;
+    private int lastSteal;
     public Stealer() {
         super("Stealer", Module.ModuleCategory.Player, 0);
         this.registerSetting(delay = new DoubleSliderSetting("Delay", 100, 150, 0, 500, 50));
@@ -26,11 +30,9 @@ public class Stealer extends Module {
         this.registerSetting(ignoreTrash = new TickSetting("Ignore Trash", true));
     }
 
-    private final TimerUtils stopwatch = new TimerUtils();
-    private long nextClick;
-    private int lastClick;
-    private int lastSteal;
-    private static boolean userInterface;
+    public static boolean inGUI() {
+        return userInterface;
+    }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
@@ -114,12 +116,6 @@ public class Stealer extends Module {
 
             userInterface = (float) confidence / (float) totalSlots > 0.5f;
         }
-    }
-
-    ;
-
-    public static boolean inGUI() {
-        return userInterface;
     }
 
     private String expectedName(final ItemStack stack) {

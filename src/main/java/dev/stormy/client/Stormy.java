@@ -31,7 +31,7 @@ public class Stormy {
    }
 
    @SubscribeEvent
-   public void onTick(KeyboardEvent e) {
+   public void onKeyboard(KeyboardEvent ev) {
       if (PlayerUtils.isPlayerInGame()) {
          for (Module module : moduleManager.getModules()) {
             if (Minecraft.getMinecraft().currentScreen == null) {

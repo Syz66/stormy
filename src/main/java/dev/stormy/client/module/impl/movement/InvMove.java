@@ -1,11 +1,11 @@
 package dev.stormy.client.module.impl.movement;
 
+import dev.stormy.client.module.Module;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
-import dev.stormy.client.module.Module;
 
 public class InvMove extends Module {
     private final KeyBinding[] moveKeys = new KeyBinding[]{

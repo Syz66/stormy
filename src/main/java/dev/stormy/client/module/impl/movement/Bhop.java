@@ -15,8 +15,8 @@ import net.weavemc.loader.api.event.TickEvent;
 @SuppressWarnings("unused")
 public class Bhop extends Module {
 
-    private final SliderSetting Speed, gs, as;
     public final TickSetting hitRec;
+    private final SliderSetting Speed, gs, as;
     public ComboSetting<mode> SpeedMode;
     public boolean incomingVelo = false;
 

@@ -1,5 +1,6 @@
 package dev.stormy.client.module.impl.combat;
 
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
@@ -7,7 +8,6 @@ import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
@@ -18,6 +18,7 @@ import org.lwjgl.input.Mouse;
 public class WTap extends Module {
     public static SliderSetting range, chance;
     public static DoubleSliderSetting delay;
+    private final int wkey = mc.gameSettings.keyBindForward.getKeyCode();
     TimerUtils timer = new TimerUtils();
 
     public WTap() {
@@ -27,8 +28,6 @@ public class WTap extends Module {
         this.registerSetting(chance = new SliderSetting("Chance", 50.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(delay = new DoubleSliderSetting("Delay", 50.0D, 100.0D, 0.0D, 300.0D, 5.0D));
     }
-
-    private final int wkey = mc.gameSettings.keyBindForward.getKeyCode();
 
     public boolean isLookingAtPlayer() {
         MovingObjectPosition result = mc.objectMouseOver;

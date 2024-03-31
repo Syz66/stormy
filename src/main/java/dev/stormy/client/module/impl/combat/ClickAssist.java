@@ -1,15 +1,18 @@
 package dev.stormy.client.module.impl.combat;
 
+import dev.stormy.client.events.UpdateEvent;
 import dev.stormy.client.module.Module;
-import dev.stormy.client.module.setting.impl.*;
+import dev.stormy.client.module.setting.impl.ComboSetting;
+import dev.stormy.client.module.setting.impl.DescriptionSetting;
+import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
+import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.utils.game.MouseManager;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import dev.stormy.client.events.UpdateEvent;
 import net.minecraft.util.ChatComponentText;
-import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.MouseEvent;
+import net.weavemc.loader.api.event.SubscribeEvent;
 
 import java.awt.*;
 
@@ -18,11 +21,10 @@ public class ClickAssist extends Module {
     public static SliderSetting chance, threshold;
     public static DoubleSliderSetting delay;
     public static ComboSetting<modes> mode;
-    private boolean allowClick = false;
     public Robot robot;
-    private int cps;
-
     public TimerUtils timer = new TimerUtils();
+    private boolean allowClick = false;
+    private int cps;
 
     public ClickAssist() {
         super("ClickAssist", ModuleCategory.Combat, 0);

@@ -1,5 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
+import dev.stormy.client.events.EventDirection;
+import dev.stormy.client.events.PacketEvent;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -9,8 +11,6 @@ import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.Packet;
 import net.weavemc.loader.api.event.*;
-import dev.stormy.client.events.EventDirection;
-import dev.stormy.client.events.PacketEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,13 +19,10 @@ import java.util.ArrayList;
 public class Blink extends Module {
     public static TickSetting inbound, outbound, spawnFake;
     public static SliderSetting pulseDelay;
-
+    private static EntityOtherPlayerMP fakePlayer;
     private final ArrayList<Packet<?>> outboundPackets = new ArrayList<>();
     private final ArrayList<Packet<?>> inboundPackets = new ArrayList<>();
-
     private final TimerUtils timer = new TimerUtils();
-
-    private static EntityOtherPlayerMP fakePlayer;
 
     public Blink() {
         super("Blink", ModuleCategory.Player, 0);

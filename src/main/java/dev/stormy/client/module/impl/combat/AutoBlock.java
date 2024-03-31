@@ -16,11 +16,11 @@ import org.lwjgl.input.Mouse;
 
 public class AutoBlock extends Module {
 
+    public static TickSetting autounblock, breakBlocks;
+    public boolean delaying, check, breakHeld = false;
     long lastClickTime = 0;
     long anotherint = 0;
-    public boolean delaying, check, breakHeld = false;
     int block = mc.gameSettings.keyBindUseItem.getKeyCode();
-    public static TickSetting autounblock, breakBlocks;
 
 
     public AutoBlock() {

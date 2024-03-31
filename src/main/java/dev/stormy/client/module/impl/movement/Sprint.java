@@ -1,12 +1,12 @@
 package dev.stormy.client.module.impl.movement;
 
+import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
-import net.weavemc.loader.api.event.TickEvent;
-import net.weavemc.loader.api.event.SubscribeEvent;
-import dev.stormy.client.module.Module;
 import net.minecraft.client.settings.KeyBinding;
+import net.weavemc.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.TickEvent;
 
 public class Sprint extends Module {
 
