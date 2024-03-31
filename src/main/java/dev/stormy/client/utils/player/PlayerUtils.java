@@ -1,6 +1,5 @@
 package dev.stormy.client.utils.player;
 
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.IMethods;
 import dev.stormy.client.utils.client.ClientUtils;
 import net.minecraft.entity.Entity;
@@ -50,6 +49,7 @@ public class PlayerUtils implements IMethods {
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
         return distance < maxDistance;
     }
+
     public static boolean playerOverAir() {
         double x = mc.thePlayer.posX;
         double y = mc.thePlayer.posY - 1.0D;

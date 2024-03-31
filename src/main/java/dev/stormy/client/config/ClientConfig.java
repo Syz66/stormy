@@ -1,9 +1,9 @@
 package dev.stormy.client.config;
 
 import dev.stormy.client.Stormy;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.clickgui.components.CategoryComponent;
 import dev.stormy.client.module.impl.client.ArrayListModule;
+import dev.stormy.client.utils.client.JavaUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -93,7 +93,7 @@ public class ClientConfig {
       for (String what : decryptedString.split("/")){
          for (CategoryComponent cat : Stormy.clickGui.getCategoryList()) {
             if(what.startsWith(cat.categoryName.name())){
-               List<String> cfg = Utils.Java.StringListToList(what.split("~"));
+               List<String> cfg = JavaUtils.arrayToList(what.split("~"));
                cat.setX(Integer.parseInt(cfg.get(1)));
                cat.setY(Integer.parseInt(cfg.get(2)));
                cat.setOpened(Boolean.parseBoolean(cfg.get(3)));

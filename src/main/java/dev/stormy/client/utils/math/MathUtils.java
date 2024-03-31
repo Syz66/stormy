@@ -1,6 +1,7 @@
 package dev.stormy.client.utils.math;
 
 import dev.stormy.client.utils.IMethods;
+
 import java.util.Random;
 
 /**

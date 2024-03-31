@@ -4,8 +4,8 @@ import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
+import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import dev.stormy.client.events.SlowdownEvent;
 import net.minecraft.client.settings.KeyBinding;
@@ -49,7 +49,7 @@ public class NoSlow extends Module {
             shouldFinishBlock = false;
             KeyBinding.setKeyBindState(rmb, false);
             KeyBinding.onTick(rmb);
-            if (timer.hasReached(100 + Utils.Java.randomInt(-10, 10))) {
+            if (timer.hasReached(100 + MathUtils.randomInt(-10, 10))) {
                 shouldFinishBlock = true;
                 KeyBinding.setKeyBindState(sprint, true);
                 KeyBinding.onTick(sprint);
@@ -60,7 +60,7 @@ public class NoSlow extends Module {
 
     @SubscribeEvent
     public void reBlock(TickEvent e) {
-        if (mode.getMode() != modes.Regular && shouldFinishBlock && timer.hasReached(100 + Utils.Java.randomInt(-10, 10))) {
+        if (mode.getMode() != modes.Regular && shouldFinishBlock && timer.hasReached(100 + MathUtils.randomInt(-10, 10))) {
             KeyBinding.setKeyBindState(rmb, true);
             KeyBinding.onTick(rmb);
             timer.reset();

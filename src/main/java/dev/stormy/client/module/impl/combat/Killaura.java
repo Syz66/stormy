@@ -5,10 +5,11 @@ import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
+import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import dev.stormy.client.events.UpdateEvent;
+import dev.stormy.client.utils.render.Render3DUtils;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
@@ -72,7 +73,7 @@ public class Killaura extends Module {
             isAttacking = false;
             return;
         }
-        if (timer.hasReached(1000 / frequency.getInput() + Utils.Java.randomInt(-3, 3)) && mc.thePlayer.hurtTime < hurtTimeAmt.getInput() && mc.currentScreen == null) {
+        if (timer.hasReached(1000 / frequency.getInput() + MathUtils.randomInt(-3, 3)) && mc.thePlayer.hurtTime < hurtTimeAmt.getInput() && mc.currentScreen == null) {
             if (target.isPresent()) {
                 if (mc.thePlayer.isBlocking() || mc.thePlayer.isEating()) return;
                 if (whenLooking.isToggled() && !aBooleanCheck()) return;
@@ -87,7 +88,7 @@ public class Killaura extends Module {
 
     public void finishDelay() {
         long currentTime = System.currentTimeMillis();
-        int newdelay = Utils.Java.randomInt(20, 70);
+        int newdelay = MathUtils.randomInt(20, 70);
         if (currentTime - lastClickTime >= newdelay) {
             lastClickTime = currentTime;
             KeyBinding.setKeyBindState(rmb, false);
@@ -100,7 +101,7 @@ public class Killaura extends Module {
     public void onRender(RenderHandEvent e) {
         if (((Mouse.isButtonDown(1) && shouldBlock.isToggled()) || alwaysAB.isToggled()) && PlayerUtils.isPlayerHoldingWeapon() && isAttacking && mc.currentScreen == null) {
             long currentTime = System.currentTimeMillis();
-            int delay = 1000 / (int) frequency.getInput() + Utils.Java.randomInt(-3, 3) - 4;
+            int delay = 1000 / (int) frequency.getInput() + MathUtils.randomInt(-3, 3) - 4;
             if (currentTime - lastClickTime >= delay && !delaying) {
                 lastClickTime = currentTime;
                 KeyBinding.setKeyBindState(rmb, true);
@@ -116,8 +117,8 @@ public class Killaura extends Module {
     @SubscribeEvent
     public void ESP(RenderWorldEvent e) {
         if (targetESP.isToggled() && target.isPresent()) {
-            Utils.HUD.drawBoxAroundEntity(target.get(), 1, 0.0D, 0.0D, Theme.getMainColor().getRGB(), true);
-            Utils.HUD.drawBoxAroundEntity(target.get(), 2, 0.0D, 0.0D, Theme.getMainColor().getRGB(), true);
+            Render3DUtils.drawEntity(target.get(), 1, Theme.getMainColor().getRGB(), true);
+            Render3DUtils.drawEntity(target.get(), 2, Theme.getMainColor().getRGB(), true);
         }
     }
 
@@ -126,7 +127,7 @@ public class Killaura extends Module {
         if (!PlayerUtils.isPlayerInGame()) return;
         if (mc.thePlayer.isBlocking() && PlayerUtils.isPlayerHoldingWeapon() && !Mouse.isButtonDown(1) && mc.currentScreen == null && !isAttacking) {
             long neow = System.currentTimeMillis();
-            int ubdelay = Utils.Java.randomInt(850, 1050);
+            int ubdelay = MathUtils.randomInt(850, 1050);
             if (neow >= ubdelay) {
                 KeyBinding.setKeyBindState(rmb, false);
                 KeyBinding.onTick(rmb);
@@ -142,8 +143,8 @@ public class Killaura extends Module {
             double deltaZ = target.get().posZ - mc.thePlayer.posZ;
             double distance = MathHelper.sqrt_double(deltaX * deltaX + deltaZ * deltaZ);
 
-            float yaw = (float) (Math.atan2(deltaZ, deltaX) * (180 / Math.PI)) - 90.0F + (float) Utils.Java.randomInt(-rotRand.getInput(), rotRand.getInput());
-            float pitch = (float) (-(Math.atan2(deltaY, distance) * (180 / Math.PI))) + (float) Utils.Java.randomInt(-rotRand.getInput(), rotRand.getInput());
+            float yaw = (float) (Math.atan2(deltaZ, deltaX) * (180 / Math.PI)) - 90.0F + (float) MathUtils.randomInt(-rotRand.getInput(), rotRand.getInput());
+            float pitch = (float) (-(Math.atan2(deltaY, distance) * (180 / Math.PI))) + (float) MathUtils.randomInt(-rotRand.getInput(), rotRand.getInput());
 
             mc.thePlayer.rotationYaw = yaw;
             mc.thePlayer.rotationPitch = pitch;

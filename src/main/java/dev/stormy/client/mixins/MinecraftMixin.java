@@ -19,4 +19,9 @@ public class MinecraftMixin {
             leftClickCounter = 0;
         }
     }
+
+    @Inject(method = "startGame", at = @At("TAIL"))
+    private void startGame(CallbackInfo ci) {
+        Stormy.init();
+    }
 }

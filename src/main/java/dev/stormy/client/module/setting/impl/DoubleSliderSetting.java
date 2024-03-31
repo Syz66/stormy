@@ -4,18 +4,21 @@ import com.google.gson.JsonObject;
 import dev.stormy.client.clickgui.Component;
 import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DoubleSliderSetting extends Setting {
+    @Getter
     private final String name;
-    private double valMax, valMin;
+    @Getter
     private final double max;
+    @Getter
     private final double min;
     private final double interval;
-
     private final double defaultValMin, defaultValMax;
+    private double valMax, valMin;
 
     public DoubleSliderSetting(String settingName, double defaultValueMin, double defaultValueMax, double min, double max, double intervals) {
         super(settingName);
@@ -29,8 +32,20 @@ public class DoubleSliderSetting extends Setting {
         this.defaultValMax = valMax;
     }
 
-    public String getName() {
-        return this.name;
+    public static double correct(double val, double min, double max) {
+        val = Math.max(min, val);
+        val = Math.min(max, val);
+        return val;
+    }
+
+    public static double round(double val, int p) {
+        if (p < 0) {
+            return 0.0D;
+        } else {
+            BigDecimal bd = new BigDecimal(val);
+            bd = bd.setScale(p, RoundingMode.HALF_UP);
+            return bd.doubleValue();
+        }
     }
 
     @Override
@@ -55,7 +70,7 @@ public class DoubleSliderSetting extends Setting {
 
     @Override
     public void applyConfigFromJson(JsonObject data) {
-        if(!data.get("type").getAsString().equals(getSettingType()))
+        if (!data.get("type").getAsString().equals(getSettingType()))
             return;
 
         setValueMax(data.get("valueMax").getAsDouble());
@@ -70,43 +85,20 @@ public class DoubleSliderSetting extends Setting {
     public double getInputMin() {
         return round(this.valMin, 2);
     }
+
     public double getInputMax() {
         return round(this.valMax, 2);
     }
 
-    public double getMin() {
-        return this.min;
-    }
-
-    public double getMax() {
-        return this.max;
-    }
-
     public void setValueMin(double n) {
         n = correct(n, this.min, this.valMax);
-        n = (double)Math.round(n * (1.0D / this.interval)) / (1.0D / this.interval);
+        n = (double) Math.round(n * (1.0D / this.interval)) / (1.0D / this.interval);
         this.valMin = n;
     }
 
     public void setValueMax(double n) {
         n = correct(n, this.valMin, this.max);
-        n = (double)Math.round(n * (1.0D / this.interval)) / (1.0D / this.interval);
+        n = (double) Math.round(n * (1.0D / this.interval)) / (1.0D / this.interval);
         this.valMax = n;
-    }
-
-    public static double correct(double val, double min, double max) {
-        val = Math.max(min, val);
-        val = Math.min(max, val);
-        return val;
-    }
-
-    public static double round(double val, int p) {
-        if (p < 0) {
-            return 0.0D;
-        } else {
-            BigDecimal bd = new BigDecimal(val);
-            bd = bd.setScale(p, RoundingMode.HALF_UP);
-            return bd.doubleValue();
-        }
     }
 }

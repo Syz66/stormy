@@ -1,8 +1,5 @@
 {
   "mixinConfigs": [
     "stormy.mixins.json"
-  ],
-  "entrypoints": [
-    "dev.stormy.client.Main"
   ]
 }

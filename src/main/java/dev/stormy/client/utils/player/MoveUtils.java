@@ -1,15 +1,14 @@
 package dev.stormy.client.utils.player;
 
-import net.minecraft.client.Minecraft;
-import net.weavemc.loader.api.event.SubscribeEvent;
 import dev.stormy.client.events.MoveEvent;
+import dev.stormy.client.utils.IMethods;
+import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MathHelper;
-
-import static dev.stormy.client.utils.Utils.mc;
+import net.weavemc.loader.api.event.SubscribeEvent;
 
 @SuppressWarnings("unused")
-public class MoveUtils {
+public class MoveUtils implements IMethods {
     public static void strafe() {
         strafe(getHorizontalMotion());
     }
@@ -29,6 +28,7 @@ public class MoveUtils {
             Minecraft.getMinecraft().thePlayer.motionX = Minecraft.getMinecraft().thePlayer.motionZ = 0;
         }
     }
+
     @SubscribeEvent
     public static void strafe(MoveEvent event, double speed) {
         float direction = (float) Math.toRadians(getPlayerDirection());
@@ -118,7 +118,7 @@ public class MoveUtils {
     }
 
     public static int getSpeedAmplifier() {
-        if(Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.moveSpeed)) {
+        if (Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.moveSpeed)) {
             return 1 + Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.moveSpeed).getAmplifier();
         }
 
@@ -141,57 +141,58 @@ public class MoveUtils {
 
     public static void boost(double amount) {
         float f = getPlayerDirection() * 0.017453292F;
-        Minecraft.getMinecraft().thePlayer.motionX -= (double)(MathHelper.sin(f) * amount);
-        Minecraft.getMinecraft().thePlayer.motionZ += (double)(MathHelper.cos(f) * amount);
+        Minecraft.getMinecraft().thePlayer.motionX -= MathHelper.sin(f) * amount;
+        Minecraft.getMinecraft().thePlayer.motionZ += MathHelper.cos(f) * amount;
     }
 
     public static void boost(MoveEvent event, double amount) {
         float f = getPlayerDirection() * 0.017453292F;
-        event.setX(Minecraft.getMinecraft().thePlayer.motionX -= (double)(MathHelper.sin(f) * amount));
-        event.setZ(Minecraft.getMinecraft().thePlayer.motionZ += (double)(MathHelper.cos(f) * amount));
+        event.setX(Minecraft.getMinecraft().thePlayer.motionX -= MathHelper.sin(f) * amount);
+        event.setZ(Minecraft.getMinecraft().thePlayer.motionZ += MathHelper.cos(f) * amount);
     }
 
     public static void jump(MoveEvent event) {
-        double jumpY = (double) Minecraft.getMinecraft().thePlayer.getJumpUpwardsMotion();
+        double jumpY = Minecraft.getMinecraft().thePlayer.getJumpUpwardsMotion();
 
-        if(Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.jump)) {
-            jumpY += (double)((float)(Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
+        if (Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.jump)) {
+            jumpY += (float) (Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
         }
 
         event.setY(Minecraft.getMinecraft().thePlayer.motionY = jumpY);
     }
 
     public static float[] incrementMoveDirection(float forward, float strafe) {
-        if(forward != 0 || strafe != 0) {
+        if (forward != 0 || strafe != 0) {
             float value = forward != 0 ? Math.abs(forward) : Math.abs(strafe);
 
-            if(forward > 0) {
-                if(strafe > 0) {
+            if (forward > 0) {
+                if (strafe > 0) {
                     strafe = 0;
-                } else if(strafe == 0) {
+                } else if (strafe == 0) {
                     strafe = -value;
-                } else if(strafe < 0) {
+                } else if (strafe < 0) {
                     forward = 0;
                 }
-            } else if(forward == 0) {
-                if(strafe > 0) {
+            } else if (forward == 0) {
+                if (strafe > 0) {
                     forward = value;
                 } else {
                     forward = -value;
                 }
             } else {
-                if(strafe < 0) {
+                if (strafe < 0) {
                     strafe = 0;
-                } else if(strafe == 0) {
+                } else if (strafe == 0) {
                     strafe = value;
-                } else if(strafe > 0) {
+                } else if (strafe > 0) {
                     forward = 0;
                 }
             }
         }
 
-        return new float[] {forward, strafe};
+        return new float[]{forward, strafe};
     }
+
     public static void setSpeed(MoveEvent moveEvent, double moveSpeed) {
         setSpeed(moveEvent, moveSpeed, mc.thePlayer.rotationYaw, mc.thePlayer.movementInput.moveStrafe, mc.thePlayer.movementInput.moveForward);
     }

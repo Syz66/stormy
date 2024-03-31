@@ -6,9 +6,9 @@ import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
+import dev.stormy.client.utils.client.ArrayListUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import dev.stormy.client.utils.render.ColorUtils;
-import dev.stormy.client.utils.Utils;
 import lombok.Getter;
 import net.weavemc.loader.api.event.RenderGameOverlayEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
@@ -25,7 +25,7 @@ public class ArrayListModule extends Module {
 
    @Getter
    public static int hudY = 5;
-   public static Utils.HUD.PositionMode positionMode;
+   public static ArrayListUtils.PositionMode positionMode;
    public static final String HUDX_prefix = "HUDX~ ";
    public static final String HUDY_prefix = "HUDY~ ";
 
@@ -62,10 +62,10 @@ public class ArrayListModule extends Module {
          int y = hudY;
 
          if (!alphabeticalSort.isToggled()){
-            if (positionMode == Utils.HUD.PositionMode.UPLEFT || positionMode == Utils.HUD.PositionMode.UPRIGHT) {
+            if (positionMode == ArrayListUtils.PositionMode.UPLEFT || positionMode == ArrayListUtils.PositionMode.UPRIGHT) {
                Stormy.moduleManager.sortShortLong();
             }
-            else if(positionMode == Utils.HUD.PositionMode.DOWNLEFT || positionMode == Utils.HUD.PositionMode.DOWNRIGHT) {
+            else if(positionMode == ArrayListUtils.PositionMode.DOWNLEFT || positionMode == ArrayListUtils.PositionMode.DOWNRIGHT) {
                Stormy.moduleManager.sortLongShort();
             }
          }
@@ -96,7 +96,7 @@ public class ArrayListModule extends Module {
 
          for (Module m : en) {
             if (m.isEnabled() && m != this) {
-               if (ArrayListModule.positionMode == Utils.HUD.PositionMode.DOWNRIGHT || ArrayListModule.positionMode == Utils.HUD.PositionMode.UPRIGHT) {
+               if (ArrayListModule.positionMode == ArrayListUtils.PositionMode.DOWNRIGHT || ArrayListModule.positionMode == ArrayListUtils.PositionMode.UPRIGHT) {
                   switch (colorMode.getMode()) {
                      case Static:
                         if (m.getSuffix() != null) {

@@ -87,7 +87,7 @@ public class Manager extends Module {
 
             final Item item = stack.getItem();
 
-            if (!ItemUtils.useful(stack)) {
+            if (ItemUtils.isBad(stack)) {
                 this.throwItem(i);
             }
 

@@ -2,7 +2,7 @@ package dev.stormy.client.clickgui.components;
 
 import dev.stormy.client.Stormy;
 import dev.stormy.client.module.Module;
-import dev.stormy.client.utils.render.RenderUtils;
+import dev.stormy.client.utils.render.Render2DUtils;
 import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import dev.stormy.client.clickgui.Component;
@@ -100,8 +100,10 @@ public class CategoryComponent {
             moduleRenderManager = moduleInCategoryIterator.next();
          }
 
-         RenderUtils.drawBorderedRoundedRect1(this.x - 1, this.y, this.x + this.width + 1, this.y + this.bh + categoryHeight + 4, 10, 1, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
+         Render2DUtils.drawBorderedRoundedRect(this.x - 1, this.y, this.x + this.width + 1, this.y + this.bh + categoryHeight + 4, 10, 1, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
       }
+
+      Render2DUtils.drawBorderedRoundedRect(this.x - 1, this.y, this.x + this.width + 1, this.y + this.bh + 14, 10, 1, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
 
       renderer.drawStringWithShadow(this.n4m ? this.pvp : this.categoryName.name(), (float)(this.x + 2), (float)(this.y + 4), Theme.getMainColor().getRGB());
       if (!this.n4m) {

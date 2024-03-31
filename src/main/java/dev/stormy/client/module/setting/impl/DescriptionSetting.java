@@ -4,53 +4,49 @@ import com.google.gson.JsonObject;
 import dev.stormy.client.clickgui.Component;
 import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
+import lombok.Getter;
+import lombok.Setter;
 
 public class DescriptionSetting extends Setting {
-   private String desc;
-   private final String defaultDesc;
+    private final String defaultDesc;
+    @Getter
+    @Setter
+    private String desc;
 
-   public DescriptionSetting(String t) {
-      super(t);
-      this.desc = t;
-      this.defaultDesc = t;
-   }
+    public DescriptionSetting(String t) {
+        super(t);
+        this.desc = t;
+        this.defaultDesc = t;
+    }
 
-   public String getDesc() {
-      return this.desc;
-   }
+    @Override
+    public void resetToDefaults() {
+        this.desc = defaultDesc;
+    }
 
-   public void setDesc(String t) {
-      this.desc = t;
-   }
+    @Override
+    public JsonObject getConfigAsJson() {
+        JsonObject data = new JsonObject();
+        data.addProperty("type", getSettingType());
+        data.addProperty("value", getDesc());
+        return data;
+    }
 
-   @Override
-   public void resetToDefaults() {
-      this.desc = defaultDesc;
-   }
+    @Override
+    public String getSettingType() {
+        return "desc";
+    }
 
-   @Override
-   public JsonObject getConfigAsJson() {
-      JsonObject data = new JsonObject();
-      data.addProperty("type", getSettingType());
-      data.addProperty("value", getDesc());
-      return data;
-   }
+    @Override
+    public void applyConfigFromJson(JsonObject data) {
+        if (!data.get("type").getAsString().equals(getSettingType()))
+            return;
 
-   @Override
-   public String getSettingType() {
-      return "desc";
-   }
+        setDesc(data.get("value").getAsString());
+    }
 
-   @Override
-   public void applyConfigFromJson(JsonObject data) {
-      if(!data.get("type").getAsString().equals(getSettingType()))
-         return;
-
-      setDesc(data.get("value").getAsString());
-   }
-
-   @Override
-   public Component createComponent(ModuleComponent moduleComponent) {
-      return null;
-   }
+    @Override
+    public Component createComponent(ModuleComponent moduleComponent) {
+        return null;
+    }
 }

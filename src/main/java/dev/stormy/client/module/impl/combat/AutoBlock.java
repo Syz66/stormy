@@ -3,7 +3,7 @@ package dev.stormy.client.module.impl.combat;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.Utils;
+import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.settings.KeyBinding;
@@ -32,7 +32,7 @@ public class AutoBlock extends Module {
 
     @SubscribeEvent
     public void bee(TickEvent e) {
-        double random = Utils.Java.randomInt(0, 2);
+        double random = MathUtils.randomInt(0, 2);
         check = random >= 0.5;
     }
 
@@ -64,7 +64,7 @@ public class AutoBlock extends Module {
         if (PlayerUtils.isPlayerInGame() && check && PlayerUtils.isPlayerHoldingWeapon() && Mouse.isButtonDown(0) && mc.currentScreen == null) {
             if (breakBlocks.isToggled() && breakBlock()) return;
             long neow = System.currentTimeMillis();
-            int delay = Utils.Java.randomInt(10, 70);
+            int delay = MathUtils.randomInt(10, 70);
             if (neow - anotherint >= delay) {
                 anotherint = neow;
                 KeyBinding.setKeyBindState(block, true);
@@ -79,7 +79,7 @@ public class AutoBlock extends Module {
     public void abfinish() {
         if (delaying) {
             long currentTime = System.currentTimeMillis();
-            int newdelay = Utils.Java.randomInt(20, 70);
+            int newdelay = MathUtils.randomInt(20, 70);
             if (currentTime - lastClickTime >= newdelay) {
                 lastClickTime = currentTime;
                 KeyBinding.setKeyBindState(block, false);
@@ -94,7 +94,7 @@ public class AutoBlock extends Module {
     public void unblockthings(TickEvent e) {
         if (autounblock.isToggled() && PlayerUtils.isPlayerInGame() && PlayerUtils.isPlayerHoldingWeapon() && !Mouse.isButtonDown(1) && mc.gameSettings.keyBindUseItem.isKeyDown() && mc.currentScreen == null) {
             long neow = System.currentTimeMillis();
-            int ubdelay = Utils.Java.randomInt(850, 1050);
+            int ubdelay = MathUtils.randomInt(850, 1050);
             if (neow >= ubdelay) {
                 KeyBinding.setKeyBindState(block, false);
                 KeyBinding.onTick(block);

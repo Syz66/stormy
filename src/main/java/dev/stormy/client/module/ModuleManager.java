@@ -1,138 +1,138 @@
 package dev.stormy.client.module;
 
 import dev.stormy.client.module.impl.client.AntiBot;
+import dev.stormy.client.module.impl.client.ArrayListModule;
 import dev.stormy.client.module.impl.client.ClickGuiModule;
 import dev.stormy.client.module.impl.combat.*;
 import dev.stormy.client.module.impl.movement.*;
 import dev.stormy.client.module.impl.player.*;
-import dev.stormy.client.module.impl.render.*;
+import dev.stormy.client.module.impl.render.Chams;
+import dev.stormy.client.module.impl.render.ChestESP;
+import dev.stormy.client.module.impl.render.Nametags;
+import dev.stormy.client.module.impl.render.PlayerESP;
+import dev.stormy.client.utils.IMethods;
+import lombok.Getter;
 import net.minecraft.client.gui.FontRenderer;
-import dev.stormy.client.module.impl.client.ArrayListModule;
-import dev.stormy.client.module.impl.movement.Timer;
-import dev.stormy.client.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ModuleManager {
-   private final List<Module> modules = new ArrayList<>();
-   public static boolean initialized = false;
+@Getter
+public class ModuleManager implements IMethods {
+    public static boolean initialized = false;
+    private final List<Module> modules = new ArrayList<>();
 
-   public ModuleManager() {
-      if (initialized) return;
+    public ModuleManager() {
+        if (initialized) return;
 
-      addModule(new AutoClicker());
-      addModule(new RightClicker());
-      addModule(new AimAssist());
-      addModule(new ClickAssist());
-      addModule(new Reach());
-      addModule(new Velocity());
-      addModule(new InvMove());
-      addModule(new NoHitDelay());
-      addModule(new Backtrack());
-      addModule(new KeepSprint());
-      addModule(new NoSlow());
-      addModule(new Timer());
-      addModule(new AutoPlace());
-      addModule(new BedNuker());
-      addModule(new FastPlace());
-      addModule(new SafeWalk());
-      addModule(new AntiBot());
-      addModule(new Chams());
-      addModule(new ChestESP());
-      addModule(new Nametags());
-      addModule(new PlayerESP());
-      addModule(new ArrayListModule());
-      addModule(new ClickGuiModule());
-      addModule(new ClosetSpeed());
-      addModule(new Blink());
-      addModule(new NoRotate());
-      addModule(new Bhop());
-      addModule(new Killaura());
-      addModule(new AntiVoid());
-      addModule(new Sprint());
-      addModule(new AutoDodge());
-      addModule(new FakeLag());
-      addModule(new Flight());
-      addModule(new AutoBlock());
-      addModule(new Strafe());
-      addModule(new Criticals());
-      addModule(new Stealer());
-      addModule(new Manager());
-      addModule(new WTap());
+        addModule(new AutoClicker());
+        addModule(new RightClicker());
+        addModule(new AimAssist());
+        addModule(new ClickAssist());
+        addModule(new Reach());
+        addModule(new Velocity());
+        addModule(new InvMove());
+        addModule(new NoHitDelay());
+        addModule(new Backtrack());
+        addModule(new KeepSprint());
+        addModule(new NoSlow());
+        addModule(new Timer());
+        addModule(new AutoPlace());
+        addModule(new BedNuker());
+        addModule(new FastPlace());
+        addModule(new SafeWalk());
+        addModule(new AntiBot());
+        addModule(new Chams());
+        addModule(new ChestESP());
+        addModule(new Nametags());
+        addModule(new PlayerESP());
+        addModule(new ArrayListModule());
+        addModule(new ClickGuiModule());
+        addModule(new ClosetSpeed());
+        addModule(new Blink());
+        addModule(new NoRotate());
+        addModule(new Bhop());
+        addModule(new Killaura());
+        addModule(new AntiVoid());
+        addModule(new Sprint());
+        addModule(new AutoDodge());
+        addModule(new FakeLag());
+        addModule(new Flight());
+        addModule(new AutoBlock());
+        addModule(new Strafe());
+        addModule(new Criticals());
+        addModule(new Stealer());
+        addModule(new Manager());
+        addModule(new WTap());
 
-      initialized = true;
-   }
+        initialized = true;
+    }
 
-   private void addModule(Module m) {
-      modules.add(m);
-      modules.sort(Comparator.comparing(module -> m.getName().toLowerCase()));
-   }
+    private void addModule(Module m) {
+        modules.add(m);
+        modules.sort(Comparator.comparing(module -> m.getName().toLowerCase()));
+    }
 
-   public Module getModuleByClazz(Class<? extends Module> c) {
-      if (!initialized) return null;
+    public Module getModuleByClazz(Class<? extends Module> c) {
+        if (!initialized) return null;
 
-      for (Module module : modules) {
-         if (module.getClass().equals(c))
-            return module;
-      }
-      return null;
-   }
+        for (Module module : modules) {
+            if (module.getClass().equals(c))
+                return module;
+        }
+        return null;
+    }
 
 
-   public List<Module> getModules() {
-      return modules;
-   }
+    public List<Module> getModulesInCategory(Module.ModuleCategory categ) {
+        java.util.ArrayList<Module> modulesOfCat = new java.util.ArrayList<>();
 
-   public List<Module> getModulesInCategory(Module.ModuleCategory categ) {
-      java.util.ArrayList<Module> modulesOfCat = new java.util.ArrayList<>();
-
-      for (Module mod : modules) {
-         if (mod.moduleCategory().equals(categ)) {
-            modulesOfCat.add(mod);
-         }
-      }
-
-      return modulesOfCat;
-   }
-
-   public void sort() {
-      if (ArrayListModule.alphabeticalSort.isToggled()) {
-         modules.sort(Comparator.comparing(Module::getName));
-      } else {
-         modules.sort((o1, o2) -> Utils.mc.fontRendererObj.getStringWidth(o2.getName()) - Utils.mc.fontRendererObj.getStringWidth(o1.getName()));
-      }
-
-   }
-
-   public void sortLongShort() {
-      modules.sort(Comparator.comparingInt(o2 -> Utils.mc.fontRendererObj.getStringWidth(o2.getName())));
-   }
-
-   public void sortShortLong() {
-      modules.sort((o1, o2) -> Utils.mc.fontRendererObj.getStringWidth(o2.getName()) - Utils.mc.fontRendererObj.getStringWidth(o1.getName()));
-   }
-
-   public int getLongestActiveModule(FontRenderer fr) {
-      int length = 0;
-      for(Module mod : modules) {
-         if(mod.isEnabled()){
-            if(fr.getStringWidth(mod.getName()) > length){
-               length = fr.getStringWidth(mod.getName());
+        for (Module mod : modules) {
+            if (mod.moduleCategory().equals(categ)) {
+                modulesOfCat.add(mod);
             }
-         }
-      }
-      return length;
-   }
+        }
 
-   public int getBoxHeight(FontRenderer fr, int margin) {
-      int length = 0;
-      for(Module mod : modules) {
-         if(mod.isEnabled()){
-            length += fr.FONT_HEIGHT + margin;
-         }
-      }
-      return length;
-   }
+        return modulesOfCat;
+    }
+
+    public void sort() {
+        if (ArrayListModule.alphabeticalSort.isToggled()) {
+            modules.sort(Comparator.comparing(Module::getName));
+        } else {
+            modules.sort((o1, o2) -> mc.fontRendererObj.getStringWidth(o2.getName()) - mc.fontRendererObj.getStringWidth(o1.getName()));
+        }
+
+    }
+
+    public void sortLongShort() {
+        modules.sort(Comparator.comparingInt(o2 -> mc.fontRendererObj.getStringWidth(o2.getName())));
+    }
+
+    public void sortShortLong() {
+        modules.sort((o1, o2) -> mc.fontRendererObj.getStringWidth(o2.getName()) - mc.fontRendererObj.getStringWidth(o1.getName()));
+    }
+
+    public int getLongestActiveModule(FontRenderer fr) {
+        int length = 0;
+        for (Module mod : modules) {
+            if (mod.isEnabled()) {
+                if (fr.getStringWidth(mod.getName()) > length) {
+                    length = fr.getStringWidth(mod.getName());
+                }
+            }
+        }
+        return length;
+    }
+
+    public int getBoxHeight(FontRenderer fr, int margin) {
+        int length = 0;
+        for (Module mod : modules) {
+            if (mod.isEnabled()) {
+                length += fr.FONT_HEIGHT + margin;
+            }
+        }
+        return length;
+    }
 }

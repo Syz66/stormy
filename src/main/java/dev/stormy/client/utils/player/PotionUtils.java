@@ -17,6 +17,7 @@ public class PotionUtils {
         put(3, 11); // Haste
         put(13, 12); // Water Breathing
     }};
+
     public static boolean goodPotion(final int id) {
         return GOOD_POTIONS.containsKey(id);
     }

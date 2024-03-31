@@ -56,7 +56,7 @@ public class Stealer extends Module {
                     continue;
                 }
 
-                if (ignoreTrash.isToggled() && !ItemUtils.useful(stack)) {
+                if (ignoreTrash.isToggled() && ItemUtils.isBad(stack)) {
                     continue;
                 }
 

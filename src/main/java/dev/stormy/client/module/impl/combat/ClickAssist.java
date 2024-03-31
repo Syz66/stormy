@@ -2,6 +2,7 @@ package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.*;
+import dev.stormy.client.utils.game.MouseManager;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
@@ -52,7 +53,6 @@ public class ClickAssist extends Module {
         if (e.getButton() == 1 && (mode.getMode().equals(modes.RMB) || mode.getMode().equals(modes.BOTH))) button = 4;
 
         if (button > 0) {
-            cps++;
             if (allowClick) {
                 double ch = Math.random() * 100;
                 if (ch >= chance.getInput()) {
@@ -60,7 +60,7 @@ public class ClickAssist extends Module {
                 }
             }
 
-            if (cps < threshold.getInput()) return;
+            if (MouseManager.getClickCounter(e.getButton()) < threshold.getInput()) return;
 
             int d = MathUtils.randomInt(delay.getInputMin(), delay.getInputMax());
             if (timer.hasReached(d)) {

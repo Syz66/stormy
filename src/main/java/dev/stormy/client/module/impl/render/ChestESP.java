@@ -2,39 +2,42 @@ package dev.stormy.client.module.impl.render;
 
 import dev.stormy.client.clickgui.Theme;
 import dev.stormy.client.module.Module;
-import dev.stormy.client.utils.Utils;
+import dev.stormy.client.module.setting.impl.ComboSetting;
+import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
+import dev.stormy.client.utils.render.Render3DUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityEnderChest;
 import net.weavemc.loader.api.event.RenderWorldEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
-import java.util.Iterator;
-
-// TODO: Rewrite
 public class ChestESP extends Module {
+    public static ComboSetting<modes> mode;
+    public static TickSetting chest, ender;
+
     public ChestESP() {
         super("ChestESP", ModuleCategory.Render, 0);
+        this.registerSetting(mode = new ComboSetting<>("Mode", modes.Shaded));
+        this.registerSetting(chest = new TickSetting("Chest", true));
+        this.registerSetting(ender = new TickSetting("Ender Chest", true));
     }
 
     @SubscribeEvent
-    public void onRenderWorldLast(RenderWorldEvent e) {
+    public void onRenderWorld(RenderWorldEvent ev) {
         if (PlayerUtils.isPlayerInGame()) {
-            Iterator<TileEntity> var3 = mc.theWorld.loadedTileEntityList.iterator();
+            for (TileEntity te : mc.theWorld.loadedTileEntityList) {
+                if (!chest.isToggled() && te instanceof TileEntityChest) continue;
+                if (!ender.isToggled() && te instanceof TileEntityEnderChest) continue;
 
-            while (true) {
-                TileEntity te;
-                do {
-                    if (!var3.hasNext()) {
-                        return;
-                    }
-
-                    te = var3.next();
-                } while (!(te instanceof TileEntityChest) && !(te instanceof TileEntityEnderChest));
-
-                Utils.HUD.re(te.getPos(), Theme.getMainColor().getRGB(), true);
+                if (te instanceof TileEntityChest || te instanceof TileEntityEnderChest) {
+                    Render3DUtils.drawBlockPos(te.getPos(), mode.getMode().ordinal(), Theme.getMainColor().getRGB());
+                }
             }
         }
+    }
+
+    public enum modes {
+        Box, Shaded, Both
     }
 }

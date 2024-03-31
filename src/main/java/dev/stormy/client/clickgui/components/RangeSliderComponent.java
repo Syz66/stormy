@@ -1,7 +1,6 @@
 package dev.stormy.client.clickgui.components;
 
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.math.MathUtils;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;

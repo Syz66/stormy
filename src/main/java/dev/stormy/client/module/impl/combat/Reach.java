@@ -18,7 +18,6 @@ import org.lwjgl.input.Mouse;
 import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.Utils;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
 import java.util.List;
@@ -131,7 +130,7 @@ public class Reach extends Module {
     }
 
     public void guiUpdate() {
-        Utils.Java.randomInt(reachDist.getMin(), reachDist.getMax());
+        MathUtils.randomInt(reachDist.getMin(), reachDist.getMax());
     }
 
     @SuppressWarnings("unused")

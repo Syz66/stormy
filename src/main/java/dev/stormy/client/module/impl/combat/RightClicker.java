@@ -4,7 +4,7 @@ import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.Utils;
+import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.ItemFood;
@@ -76,13 +76,13 @@ public class RightClicker extends Module {
     }
 
     public void randomizer() {
-        double random = Utils.Java.randomInt(0, 2);
+        double random = MathUtils.randomInt(0, 2);
         shouldClick = random >= 0.5;
     }
 
     public void finishDelay() {
         long currentTime = System.currentTimeMillis();
-        int newdelay = Utils.Java.randomInt(20, 70);
+        int newdelay = MathUtils.randomInt(20, 70);
 
         if (currentTime - lastClickTime >= newdelay) {
             lastClickTime = currentTime;

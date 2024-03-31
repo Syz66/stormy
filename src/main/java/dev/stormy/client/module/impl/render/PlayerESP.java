@@ -5,14 +5,13 @@ import dev.stormy.client.module.Module;
 import dev.stormy.client.module.impl.client.AntiBot;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.player.PlayerUtils;
-import net.minecraft.entity.Entity;
+import dev.stormy.client.utils.render.Render3DUtils;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.weavemc.loader.api.event.RenderWorldEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
-import java.util.Iterator;
 
 public class PlayerESP extends Module {
     public static TickSetting redDmg;
@@ -24,49 +23,20 @@ public class PlayerESP extends Module {
         this.registerSetting(redDmg = new TickSetting("Red on damage", true));
     }
 
-    @Override
-    public void onDisable() {
-        Utils.HUD.ring_c = false;
-    }
-
     @SubscribeEvent
-    public void onRender(RenderWorldEvent e) {
+    public void onRenderWorld(RenderWorldEvent ev) {
         if (PlayerUtils.isPlayerInGame()) {
-            Iterator<EntityPlayer> var3 = mc.theWorld.playerEntities.iterator();
-
-            while (true) {
-                EntityPlayer en;
-                do {
-                    do {
-                        if (!var3.hasNext()) {
-                            return;
-                        }
-
-                        en = var3.next();
-                    } while (en == mc.thePlayer);
-                } while (en.deathTime != 0);
-
-                if (!AntiBot.bot(en)) {
-                    this.callRender(en, Theme.getMainColor().getRGB());
+            for (EntityPlayer player : mc.theWorld.playerEntities) {
+                if (!AntiBot.bot(player) && !(player instanceof EntityPlayerSP)) {
+                    Render3DUtils.drawEntity(
+                            player,
+                            mode.getMode().ordinal(),
+                            Theme.getMainColor().getRGB(),
+                            redDmg.isToggled()
+                    );
                 }
             }
         }
-    }
-
-    private void callRender(Entity en, int rgb) {
-        if (mode.getMode() == modes.Box) {
-            Utils.HUD.drawBoxAroundEntity(en, 1, 0.0D, 0.0D, rgb, redDmg.isToggled());
-        }
-
-        if (mode.getMode() == modes.Shaded) {
-            Utils.HUD.drawBoxAroundEntity(en, 2, 0.0D, 0.0D, rgb, redDmg.isToggled());
-        }
-
-        if (mode.getMode() == modes.Both) {
-            Utils.HUD.drawBoxAroundEntity(en, 1, 0.0D, 0.0D, rgb, redDmg.isToggled());
-            Utils.HUD.drawBoxAroundEntity(en, 2, 0.0D, 0.0D, rgb, redDmg.isToggled());
-        }
-
     }
 
     public enum modes {

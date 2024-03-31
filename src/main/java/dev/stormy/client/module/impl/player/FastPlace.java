@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import net.weavemc.loader.api.event.TickEvent;
 
+// TODO: Clean
 public class FastPlace extends Module {
     public static SliderSetting delaySlider;
     public static TickSetting blockOnly;

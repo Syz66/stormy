@@ -1,11 +1,12 @@
 package dev.stormy.client.clickgui;
 
+import dev.stormy.client.utils.client.ArrayListUtils;
+import dev.stormy.client.utils.client.JavaUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import dev.stormy.client.module.impl.client.ArrayListModule;
-import dev.stormy.client.utils.Utils;
 
 import java.awt.*;
 import java.util.Comparator;
@@ -32,7 +33,7 @@ public class ArrayListPosition extends GuiScreen {
         this.marginX = ArrayListModule.hudX;
         this.marginY = ArrayListModule.hudY;
         sr = new ScaledResolution(mc);
-        ArrayListModule.positionMode = Utils.HUD.getPostitionMode(marginX, marginY, sr.getScaledWidth(), sr.getScaledHeight());
+        ArrayListModule.positionMode = ArrayListUtils.getPostitionMode(marginX, marginY, sr.getScaledWidth(), sr.getScaledHeight());
     }
 
     public void drawScreen(int mX, int mY, float pt) {
@@ -53,7 +54,7 @@ public class ArrayListPosition extends GuiScreen {
         ScaledResolution res = new ScaledResolution(this.mc);
         int descriptionOffsetX = res.getScaledWidth() / 2 - 84;
         int descriptionOffsetY = res.getScaledHeight() / 2 - 20;
-        Utils.mc.fontRendererObj.drawStringWithShadow("Edit the HUD position by dragging.", '-', descriptionOffsetX, descriptionOffsetY);
+        mc.fontRendererObj.drawStringWithShadow("Edit the HUD position by dragging.", '-', descriptionOffsetX, descriptionOffsetY);
 
         this.handleInput();
 
@@ -66,15 +67,15 @@ public class ArrayListPosition extends GuiScreen {
         int y = this.textBoxStartY;
         double marginY = fr.FONT_HEIGHT + 2;
         String[] var4 = t.split("-");
-        java.util.ArrayList<String> var5 = Utils.Java.toArrayList(var4);
-        if (ArrayListModule.positionMode == Utils.HUD.PositionMode.UPLEFT || ArrayListModule.positionMode == Utils.HUD.PositionMode.UPRIGHT) {
-            var5.sort((o1, o2) -> Utils.mc.fontRendererObj.getStringWidth(o2) - Utils.mc.fontRendererObj.getStringWidth(o1));
+        java.util.ArrayList<String> var5 = JavaUtils.toArrayList(var4);
+        if (ArrayListModule.positionMode == ArrayListUtils.PositionMode.UPLEFT || ArrayListModule.positionMode == ArrayListUtils.PositionMode.UPRIGHT) {
+            var5.sort((o1, o2) -> mc.fontRendererObj.getStringWidth(o2) - mc.fontRendererObj.getStringWidth(o1));
         }
-        else if(ArrayListModule.positionMode == Utils.HUD.PositionMode.DOWNLEFT || ArrayListModule.positionMode == Utils.HUD.PositionMode.DOWNRIGHT) {
-            var5.sort(Comparator.comparingInt(o2 -> Utils.mc.fontRendererObj.getStringWidth(o2)));
+        else if(ArrayListModule.positionMode == ArrayListUtils.PositionMode.DOWNLEFT || ArrayListModule.positionMode == ArrayListUtils.PositionMode.DOWNRIGHT) {
+            var5.sort(Comparator.comparingInt(o2 -> mc.fontRendererObj.getStringWidth(o2)));
         }
 
-        if(ArrayListModule.positionMode == Utils.HUD.PositionMode.DOWNRIGHT || ArrayListModule.positionMode == Utils.HUD.PositionMode.UPRIGHT){
+        if(ArrayListModule.positionMode == ArrayListUtils.PositionMode.DOWNRIGHT || ArrayListModule.positionMode == ArrayListUtils.PositionMode.UPRIGHT){
             for (String s : var5) {
                 fr.drawString(s, (float) x + (gap - fr.getStringWidth(s)), (float) y, Color.white.getRGB(), true);
                 y += (int) marginY;
@@ -94,7 +95,7 @@ public class ArrayListPosition extends GuiScreen {
                 this.marginX = this.lastMousePosX + (mousePosX - this.sessionMousePosX);
                 this.marginY = this.lastMousePosY + (mousePosY - this.sessionMousePosY);
                 sr = new ScaledResolution(mc);
-                ArrayListModule.positionMode = Utils.HUD.getPostitionMode(marginX, marginY,sr.getScaledWidth(), sr.getScaledHeight());
+                ArrayListModule.positionMode = ArrayListUtils.getPostitionMode(marginX, marginY,sr.getScaledWidth(), sr.getScaledHeight());
 
                 //in the else if statement, we check if the mouse is clicked AND inside the "text box"
             } else if (mousePosX > this.textBoxStartX && mousePosX < this.textBoxEndX && mousePosY > this.textBoxStartY && mousePosY < this.textBoxEndY) {

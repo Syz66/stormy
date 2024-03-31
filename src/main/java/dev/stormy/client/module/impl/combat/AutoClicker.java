@@ -4,8 +4,8 @@ import dev.stormy.client.module.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.Utils;
 import dev.stormy.client.utils.asm.HookUtils;
+import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.block.BlockLiquid;
@@ -76,12 +76,11 @@ public class AutoClicker extends Module {
             if (hitSelect.isToggled() && !hitSelectLogic()) return;
             if (breakBlock()) return;
             long currentTime = System.currentTimeMillis();
-            if (t.hasReached(Utils.Java.randomInt(5000, 10000))) {
-                delay = (1000 / (int) (leftCPS.getInput() + (Utils.Java.randomInt(-4, 0))));
+            if (t.hasReached(MathUtils.randomInt(5000, 10000))) {
+                delay = (1000 / (int) (leftCPS.getInput() + (MathUtils.randomInt(-4, 0))));
                 t.reset();
-            } else delay = (1000 / (int) (leftCPS.getInput() + (Utils.Java.randomInt(-3, 3))));
-            if (delay < 0) delay = (1000 / (int) (leftCPS.getInput() + (Utils.Java.randomInt(0, 3))));
-            //don't turn it too low or else you'll crash because im the best developer of the century
+            } else delay = (1000 / (int) (leftCPS.getInput() + (MathUtils.randomInt(-3, 3))));
+            if (delay < 0) delay = (1000 / (int) (leftCPS.getInput() + (MathUtils.randomInt(0, 3))));
             if (currentTime - lastClickTime >= delay && !delaying) {
                 lastClickTime = currentTime;
                 KeyBinding.setKeyBindState(lmb, true);
@@ -97,13 +96,13 @@ public class AutoClicker extends Module {
     }
 
     public void randomizer() {
-        double random = Utils.Java.randomInt(0, 4);
+        double random = MathUtils.randomInt(0, 4);
         shouldClick = random >= 0.5;
     }
 
     public void finishDelay() {
         long currentTime = System.currentTimeMillis();
-        int newdelay = Utils.Java.randomInt(30, 120);
+        int newdelay = MathUtils.randomInt(30, 120);
 
         if (currentTime - lastClickTime >= newdelay) {
             lastClickTime = currentTime;

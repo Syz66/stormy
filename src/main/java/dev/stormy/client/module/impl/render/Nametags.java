@@ -15,6 +15,7 @@ import net.weavemc.loader.api.event.RenderLivingEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
+// TODO: Clean up
 public class Nametags extends Module {
     public static SliderSetting opacity;
     public static TickSetting shadow, showHealth;
@@ -28,8 +29,7 @@ public class Nametags extends Module {
 
     @SubscribeEvent
     public void onRenderLivingEvent(RenderLivingEvent.Pre event) {
-        if (event.getEntity() instanceof EntityPlayer && event.getEntity() != mc.thePlayer && event.getEntity().deathTime == 0) {
-            EntityPlayer en = (EntityPlayer) event.getEntity();
+        if (event.getEntity() instanceof EntityPlayer en && event.getEntity() != mc.thePlayer && event.getEntity().deathTime == 0) {
             if (AntiBot.bot(en) || en.getDisplayName().getUnformattedText().isEmpty()) return;
 
             String str = en.getDisplayName().getFormattedText();
