@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -20,7 +21,7 @@ public class Flight extends Module {
     private boolean started;
 
     public Flight() {
-        super("Flight", ModuleCategory.Movement, 0);
+        super("Flight", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("ZOOM"));
         this.registerSetting(airspeed = new SliderSetting("Airspeed", 1, 0, 10, 0.5));
         this.registerSetting(flightMode = new ComboSetting<>("Mode", modeee.AirWalk));

@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.render;
 
 import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
@@ -17,7 +18,7 @@ public class ChestESP extends Module {
     public static TickSetting chest, ender;
 
     public ChestESP() {
-        super("ChestESP", ModuleCategory.Render, 0);
+        super("ChestESP", Category.Render, 0);
         this.registerSetting(mode = new ComboSetting<>("Mode", modes.Shaded));
         this.registerSetting(chest = new TickSetting("Chest", true));
         this.registerSetting(ender = new TickSetting("Ender Chest", true));

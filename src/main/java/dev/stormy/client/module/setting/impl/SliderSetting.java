@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
 import lombok.Getter;
 
@@ -20,13 +18,13 @@ public class SliderSetting extends Setting {
     private final double defaultVal;
     private double value;
 
-    public SliderSetting(String settingName, double defaultValue, double min, double max, double intervals) {
+    public SliderSetting(String settingName, double defaultValue, double min, double max, double interval) {
         super(settingName);
         this.name = settingName;
         this.value = defaultValue;
         this.min = min;
         this.max = max;
-        this.interval = intervals;
+        this.interval = interval;
         this.defaultVal = defaultValue;
     }
 
@@ -66,15 +64,9 @@ public class SliderSetting extends Setting {
 
     @Override
     public void applyConfigFromJson(JsonObject data) {
-        if (!data.get("type").getAsString().equals(getSettingType()))
-            return;
+        if (!data.get("type").getAsString().equals(getSettingType())) return;
 
         setValue(data.get("value").getAsDouble());
-    }
-
-    @Override
-    public Component createComponent(ModuleComponent moduleComponent) {
-        return null;
     }
 
     public double getInput() {

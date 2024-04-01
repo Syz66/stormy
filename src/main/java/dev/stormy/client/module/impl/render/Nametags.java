@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.render;
 
 import dev.stormy.client.events.RenderLabelEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.impl.client.AntiBot;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -21,7 +22,7 @@ public class Nametags extends Module {
     public static TickSetting shadow, showHealth;
 
     public Nametags() {
-        super("Nametags", ModuleCategory.Render, 0);
+        super("Nametags", Category.Render, 0);
         this.registerSetting(opacity = new SliderSetting("Opacity", 0.25D, 0.00D, 1.00D, 0.05D));
         this.registerSetting(shadow = new TickSetting("Shadow", false));
         this.registerSetting(showHealth = new TickSetting("Show health", true));

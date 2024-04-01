@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.render;
 
 import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.impl.client.AntiBot;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -18,7 +19,7 @@ public class PlayerESP extends Module {
     public static ComboSetting<modes> mode;
 
     public PlayerESP() {
-        super("PlayerESP", ModuleCategory.Render, 0);
+        super("PlayerESP", Category.Render, 0);
         this.registerSetting(mode = new ComboSetting<>("Mode", modes.Shaded));
         this.registerSetting(redDmg = new TickSetting("Red on damage", true));
     }

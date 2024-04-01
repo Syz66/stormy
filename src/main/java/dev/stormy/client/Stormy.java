@@ -8,8 +8,8 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 import dev.stormy.client.clickgui.ClickGui;
 import dev.stormy.client.config.ClientConfig;
 import dev.stormy.client.config.ConfigManager;
-import dev.stormy.client.module.Module;
-import dev.stormy.client.module.ModuleManager;
+import dev.stormy.client.module.api.Module;
+import dev.stormy.client.module.api.ModuleManager;
 import dev.stormy.client.utils.game.MouseManager;
 
 // TODO: Fix naming convention

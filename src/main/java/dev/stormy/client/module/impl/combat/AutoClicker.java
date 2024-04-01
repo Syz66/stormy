@@ -1,10 +1,11 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import dev.stormy.client.utils.asm.HookUtils;
+import dev.stormy.client.utils.client.ClientUtils;
 import dev.stormy.client.utils.math.MathUtils;
 import dev.stormy.client.utils.math.TimerUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
@@ -33,7 +34,7 @@ public class AutoClicker extends Module {
     int delay = 0;
 
     public AutoClicker() {
-        super("AutoClicker", ModuleCategory.Combat, 0);
+        super("AutoClicker", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Click automatically"));
         this.registerSetting(leftCPS = new SliderSetting("CPS", 10.0D, 1.0D, 20.0D, 1.0D));
         this.registerSetting(breakBlocks = new TickSetting("Break blocks", false));
@@ -87,7 +88,7 @@ public class AutoClicker extends Module {
                 lastClickTime = currentTime;
                 KeyBinding.setKeyBindState(lmb, true);
                 KeyBinding.onTick(lmb);
-                HookUtils.setMouseButtonState(0, true);
+                ClientUtils.setMouseButtonState(0, true);
                 delaying = true;
             }
             if (delaying) {
@@ -111,7 +112,7 @@ public class AutoClicker extends Module {
             KeyBinding.setKeyBindState(lmb, false);
             KeyBinding.onTick(lmb);
             EventBus.callEvent(new MouseEvent());
-            HookUtils.setMouseButtonState(0, false);
+            ClientUtils.setMouseButtonState(0, false);
             delaying = false;
             shouldClick = false;
         }

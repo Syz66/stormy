@@ -1,8 +1,9 @@
 package dev.stormy.client.module.impl.client;
 
-import dev.stormy.client.clickgui.ClickGui;
 import dev.stormy.client.Stormy;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.clickgui.ClickGui;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.client.settings.GameSettings;
@@ -12,15 +13,14 @@ import net.weavemc.loader.api.event.TickEvent;
 
 public class ClickGuiModule extends Module {
     public static ComboSetting<Colors> clientTheme;
-
-    public ClickGuiModule() {
-        super("ClickGui", Module.ModuleCategory.Client, 28);
-        this.registerSetting(clientTheme = new ComboSetting<>("Theme", Colors.Steel));
-    }
-
     private final KeyBinding[] moveKeys = new KeyBinding[]{
             mc.gameSettings.keyBindForward, mc.gameSettings.keyBindBack, mc.gameSettings.keyBindRight, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindJump, mc.gameSettings.keyBindSprint
     };
+
+    public ClickGuiModule() {
+        super("ClickGui", Category.Client, 28);
+        this.registerSetting(clientTheme = new ComboSetting<>("Theme", Colors.Steel));
+    }
 
     @Override
     public void onEnable() {

@@ -2,7 +2,8 @@ package dev.stormy.client.module.impl.player;
 
 import dev.stormy.client.events.EventDirection;
 import dev.stormy.client.events.PacketEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -25,7 +26,7 @@ public class Blink extends Module {
     private final TimerUtils timer = new TimerUtils();
 
     public Blink() {
-        super("Blink", ModuleCategory.Player, 0);
+        super("Blink", Category.Player, 0);
         this.registerSetting(new DescriptionSetting("Chokes packets until disabled."));
         this.registerSetting(pulseDelay = new SliderSetting("Pulse Delay", 0, 0, 1000, 10));
         this.registerSetting(inbound = new TickSetting("Block Inbound", true));

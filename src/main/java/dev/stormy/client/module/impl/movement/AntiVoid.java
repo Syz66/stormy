@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -16,7 +17,7 @@ public class AntiVoid extends Module {
     public final SliderSetting fallDist;
 
     public AntiVoid() {
-        super("AntiVoid", ModuleCategory.Movement, 0);
+        super("AntiVoid", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("Prevents falling in the void."));
         this.registerSetting(mode = new ComboSetting<>("Mode", modes.NCP));
         this.registerSetting(fallDist = new SliderSetting("Fall Distance", 5.0D, 1.0D, 40.0D, 1.0D));

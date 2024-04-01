@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
 import lombok.Getter;
 
@@ -19,7 +17,7 @@ public class TickSetting extends Setting {
         this.defaultValue = isEnabled;
     }
 
-   @Override
+    @Override
     public void resetToDefaults() {
         this.isEnabled = defaultValue;
     }
@@ -43,11 +41,6 @@ public class TickSetting extends Setting {
             return;
 
         setEnabled(data.get("value").getAsBoolean());
-    }
-
-    @Override
-    public Component createComponent(ModuleComponent moduleComponent) {
-        return null;
     }
 
     public boolean isToggled() {

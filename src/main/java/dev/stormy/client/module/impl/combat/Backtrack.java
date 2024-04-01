@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -26,7 +27,7 @@ public class Backtrack extends Module {
     private Optional<EntityPlayer> target = Optional.empty();
 
     public Backtrack() {
-        super("Backtrack", ModuleCategory.Combat, 0);
+        super("Backtrack", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Delays inbound packets"));
         this.registerSetting(spoofms = new SliderSetting("Ping in ms", 50.0, 0.0, 500.0, 5.0));
         this.registerSetting(range = new SliderSetting("Range", 5.0, 0.0, 7.0, 0.1));

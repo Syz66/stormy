@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.weavemc.loader.api.event.PacketEvent;
@@ -8,7 +9,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 
 public class NoRotate extends Module {
     public NoRotate() {
-        super("NoRotate", ModuleCategory.Player, 0);
+        super("NoRotate", Category.Player, 0);
     }
 
     @SubscribeEvent

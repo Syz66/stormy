@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.events.UpdateEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -22,7 +23,7 @@ public class WTap extends Module {
     TimerUtils timer = new TimerUtils();
 
     public WTap() {
-        super("WTap", Module.ModuleCategory.Combat, 0);
+        super("WTap", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Sprint resets automatically."));
         this.registerSetting(range = new SliderSetting("Range", 4.0D, 0.0D, 6.0D, 0.1D));
         this.registerSetting(chance = new SliderSetting("Chance", 50.0D, 0.0D, 100.0D, 1.0D));

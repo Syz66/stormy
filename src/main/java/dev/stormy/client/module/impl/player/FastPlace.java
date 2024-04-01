@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
@@ -16,7 +17,7 @@ public class FastPlace extends Module {
     public static TickSetting blockOnly;
 
     public FastPlace() {
-        super("FastPlace", ModuleCategory.Player, 0);
+        super("FastPlace", Category.Player, 0);
         this.registerSetting(delaySlider = new SliderSetting("Delay", 0.0D, 0.0D, 3.0D, 1.0D));
         this.registerSetting(blockOnly = new TickSetting("Blocks only", true));
     }

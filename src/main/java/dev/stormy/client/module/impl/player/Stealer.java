@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.player;
 
 import dev.stormy.client.events.UpdateEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
@@ -24,7 +25,7 @@ public class Stealer extends Module {
     private int lastClick;
     private int lastSteal;
     public Stealer() {
-        super("Stealer", Module.ModuleCategory.Player, 0);
+        super("Stealer", Category.Player, 0);
         this.registerSetting(delay = new DoubleSliderSetting("Delay", 100, 150, 0, 500, 50));
         this.registerSetting(menuCheck = new TickSetting("Menu Check", true));
         this.registerSetting(ignoreTrash = new TickSetting("Ignore Trash", true));
@@ -39,7 +40,6 @@ public class Stealer extends Module {
         if (!event.isPre()) return;
         if (mc.currentScreen instanceof GuiChest) {
             final ContainerChest container = (ContainerChest) mc.thePlayer.openContainer;
-            final String containerName = container.getLowerChestInventory().getDisplayName().getUnformattedText();
 
             if (menuCheck.isToggled() && inGUI()) {
                 return;
@@ -89,7 +89,8 @@ public class Stealer extends Module {
         if (mc.currentScreen instanceof GuiChest) {
             final ContainerChest container = (ContainerChest) mc.thePlayer.openContainer;
 
-            int confidence = 0, totalSlots = 0, amount = 0;
+            double confidence = 0;
+            int totalSlots = 0, amount = 0;
 
             for (final Slot slot : container.inventorySlots) {
                 if (slot.getHasStack() && amount++ <= 26) {
@@ -105,7 +106,7 @@ public class Stealer extends Module {
                     final String strippedExpectedName = expectedName.toLowerCase().replace(" ", "");
 
                     if (strippedName.contains(strippedExpectedName)) {
-                        confidence -= 0.1;
+                        confidence -= 0.1D;
                     } else {
                         confidence++;
                     }

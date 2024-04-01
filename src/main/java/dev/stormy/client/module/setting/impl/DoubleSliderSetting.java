@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
 import lombok.Getter;
 
@@ -75,11 +73,6 @@ public class DoubleSliderSetting extends Setting {
 
         setValueMax(data.get("valueMax").getAsDouble());
         setValueMin(data.get("valueMin").getAsDouble());
-    }
-
-    @Override
-    public Component createComponent(ModuleComponent moduleComponent) {
-        return null;
     }
 
     public double getInputMin() {

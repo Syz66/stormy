@@ -20,9 +20,4 @@ public class ColorUtils {
         final double percent = Math.sin(System.currentTimeMillis() / 600.0D - yLocation * 0.06D) * 0.5D + 0.5D;
         return getColor(color, percent);
     }
-
-    public static int rainbowDraw(long speed, long... delay) {
-        long time = System.currentTimeMillis() + (delay.length > 0 ? delay[0] : 0L);
-        return Color.getHSBColor((float) (time % (15000L / speed)) / (15000.0F / (float) speed), 1.0F, 1.0F).getRGB();
-    }
 }

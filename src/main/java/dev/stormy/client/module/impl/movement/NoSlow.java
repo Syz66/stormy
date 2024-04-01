@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.movement;
 
 import dev.stormy.client.events.SlowdownEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -28,7 +29,7 @@ public class NoSlow extends Module {
     private final TimerUtils timer = new TimerUtils();
 
     public NoSlow() {
-        super("NoSlow", ModuleCategory.Movement, 0);
+        super("NoSlow", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("Default is 80% slow."));
         this.registerSetting(speed = new SliderSetting("Slow %", 80.0D, 0.0D, 80.0D, 1.0D));
         this.registerSetting(autosprint = new TickSetting("Allow Sprint", false));

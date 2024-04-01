@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.events.UpdateEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
@@ -27,7 +28,7 @@ public class ClickAssist extends Module {
     private int cps;
 
     public ClickAssist() {
-        super("ClickAssist", ModuleCategory.Combat, 0);
+        super("ClickAssist", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Chance to double click."));
         this.registerSetting(chance = new SliderSetting("Chance", 50.0D, 0.0D, 100.0D, 1.0D));
         this.registerSetting(delay = new DoubleSliderSetting("Delay", 40, 100, 0, 300, 1));

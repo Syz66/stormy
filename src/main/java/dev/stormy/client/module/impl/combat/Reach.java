@@ -2,7 +2,8 @@ package dev.stormy.client.module.impl.combat;
 
 
 import dev.stormy.client.Stormy;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -28,7 +29,7 @@ public class Reach extends Module {
     public static TickSetting movingOnly, sprintOnly, hitThroughBlocks;
 
     public Reach() {
-        super("Reach", ModuleCategory.Combat, 0);
+        super("Reach", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Increases your reach."));
         this.registerSetting(reachDist = new DoubleSliderSetting("Reach", 3.0D, 3.15D, 3.0D, 6.0D, 0.05D));
         this.registerSetting(movingOnly = new TickSetting("Moving only", false));
@@ -40,31 +41,26 @@ public class Reach extends Module {
         return a.getInputMin() == a.getInputMax() ? a.getInputMin() : a.getInputMin() + r.nextDouble() * (a.getInputMax() - a.getInputMin());
     }
 
-    public static boolean callReach() {
-        if (!PlayerUtils.isPlayerInGame()) {
-            return false;
-        } else if (movingOnly.isToggled() && (double) mc.thePlayer.moveForward == 0.0D && (double) mc.thePlayer.moveStrafing == 0.0D) {
-            return false;
-        } else if (sprintOnly.isToggled() && !mc.thePlayer.isSprinting()) {
-            return false;
-        } else {
-            if (!hitThroughBlocks.isToggled() && mc.objectMouseOver != null) {
-                BlockPos p = mc.objectMouseOver.getBlockPos();
-                if (p != null && mc.theWorld.getBlockState(p).getBlock() != Blocks.air) {
-                    return false;
-                }
-            }
+    public static void callReach() {
+        if (!PlayerUtils.isPlayerInGame()) return;
+        if (movingOnly.isToggled() && (double) mc.thePlayer.moveForward == 0.0D && (double) mc.thePlayer.moveStrafing == 0.0D) return;
+        if (sprintOnly.isToggled() && !mc.thePlayer.isSprinting()) return;
 
-            double reach = mmVal(reachDist, MathUtils.rand());
-            Object[] object = findEntitiesWithinReach(reach);
-            if (object == null) {
-                return false;
-            } else {
-                Entity en = (Entity) object[0];
-                mc.objectMouseOver = new MovingObjectPosition(en, (Vec3) object[1]);
-                mc.pointedEntity = en;
-                return true;
+        if (!hitThroughBlocks.isToggled() && mc.objectMouseOver != null) {
+            BlockPos p = mc.objectMouseOver.getBlockPos();
+            if (p != null && mc.theWorld.getBlockState(p).getBlock() != Blocks.air) {
+                return;
             }
+        }
+
+        double reach = mmVal(reachDist, MathUtils.rand());
+
+        Object[] object = findEntitiesWithinReach(reach);
+
+        if (object != null) {
+            Entity en = (Entity) object[0];
+            mc.objectMouseOver = new MovingObjectPosition(en, (Vec3) object[1]);
+            mc.pointedEntity = en;
         }
     }
 

@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
 
 public class ComboSetting<T extends Enum<?>> extends Setting {
@@ -50,11 +48,6 @@ public class ComboSetting<T extends Enum<?>> extends Setting {
             if (opt.toString().equals(bruh))
                 setMode(opt);
         }
-    }
-
-    @Override
-    public Component createComponent(ModuleComponent moduleComponent) {
-        return null;
     }
 
     public T getMode() {

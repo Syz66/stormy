@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
 import net.minecraft.network.play.client.C02PacketUseEntity;
@@ -12,7 +13,7 @@ import net.weavemc.loader.api.event.SubscribeEvent;
 @SuppressWarnings("unused")
 public class Criticals extends Module {
     public Criticals() {
-        super("Criticals", ModuleCategory.Combat, 0);
+        super("Criticals", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Packet criticals"));
     }
 

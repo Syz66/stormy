@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.movement;
 
 import dev.stormy.client.events.MoveEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.MoveUtils;
@@ -12,7 +13,7 @@ public class Strafe extends Module {
     public TickSetting og, air;
 
     public Strafe() {
-        super("Strafe", ModuleCategory.Movement, 0);
+        super("Strafe", Category.Movement, 0);
         registerSetting(new DescriptionSetting("Strafe"));
         registerSetting(og = new TickSetting("Ground", true));
         registerSetting(air = new TickSetting("Air", true));

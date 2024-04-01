@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.math.MathUtils;
@@ -24,7 +25,7 @@ public class AutoBlock extends Module {
 
 
     public AutoBlock() {
-        super("AutoBlock", ModuleCategory.Combat, 0);
+        super("AutoBlock", Category.Combat, 0);
         registerSetting(new DescriptionSetting("Blocks on attack."));
         registerSetting(autounblock = new TickSetting("Unblock after ~1 sec of no RMB", true));
         registerSetting(breakBlocks = new TickSetting("Break Blocks", true));

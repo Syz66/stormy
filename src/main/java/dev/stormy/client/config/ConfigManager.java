@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dev.stormy.client.Stormy;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Module;
 
 import java.io.File;
 import java.io.FileReader;

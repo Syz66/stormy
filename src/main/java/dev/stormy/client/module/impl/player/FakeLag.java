@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.utils.packet.TimedPacket;
@@ -15,7 +16,7 @@ public class FakeLag extends Module {
     public final ConcurrentLinkedQueue<TimedPacket> outgoingPackets = new ConcurrentLinkedQueue<>();
 
     public FakeLag() {
-        super("FakeLag", ModuleCategory.Player, 0);
+        super("FakeLag", Category.Player, 0);
         this.registerSetting(new DescriptionSetting("Delays packets."));
         this.registerSetting(spoofms = new SliderSetting("Ping in ms", 80.0, 30.0, 1000.0, 5.0));
     }

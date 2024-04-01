@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 import dev.stormy.client.module.setting.Setting;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,10 +41,5 @@ public class DescriptionSetting extends Setting {
             return;
 
         setDesc(data.get("value").getAsString());
-    }
-
-    @Override
-    public Component createComponent(ModuleComponent moduleComponent) {
-        return null;
     }
 }

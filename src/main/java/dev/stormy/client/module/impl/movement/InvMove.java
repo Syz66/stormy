@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
@@ -13,7 +14,7 @@ public class InvMove extends Module {
     };
 
     public InvMove() {
-        super("InvMove", ModuleCategory.Movement, 0);
+        super("InvMove", Category.Movement, 0);
     }
 
     @SubscribeEvent

@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.player.PlayerUtils;
@@ -13,7 +14,7 @@ public class Sprint extends Module {
     public final TickSetting Omni;
 
     public Sprint() {
-        super("Sprint", ModuleCategory.Movement, 0);
+        super("Sprint", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("Automatically sprint."));
         this.registerSetting(Omni = new TickSetting("Omni", false));
     }

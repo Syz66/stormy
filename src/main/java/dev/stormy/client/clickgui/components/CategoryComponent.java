@@ -1,7 +1,8 @@
 package dev.stormy.client.clickgui.components;
 
 import dev.stormy.client.Stormy;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.utils.render.Render2DUtils;
 import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
@@ -14,7 +15,7 @@ import java.util.Iterator;
 
 public class CategoryComponent {
    public ArrayList<ModuleComponent> modulesInCategory = new ArrayList<>();
-   public Module.ModuleCategory categoryName;
+   public Category categoryName;
    private boolean categoryOpened;
    private int width;
    private int y;
@@ -28,7 +29,7 @@ public class CategoryComponent {
    public boolean pin = false;
    private final double marginY, marginX;
 
-   public CategoryComponent(Module.ModuleCategory category) {
+   public CategoryComponent(Category category) {
       this.categoryName = category;
       this.width = 92;
       this.x = 5;

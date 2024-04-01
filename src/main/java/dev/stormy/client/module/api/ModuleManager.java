@@ -1,4 +1,4 @@
-package dev.stormy.client.module;
+package dev.stormy.client.module.api;
 
 import dev.stormy.client.module.impl.client.AntiBot;
 import dev.stormy.client.module.impl.client.ArrayListModule;
@@ -56,7 +56,6 @@ public class ModuleManager implements IMethods {
         addModule(new Killaura());
         addModule(new AntiVoid());
         addModule(new Sprint());
-        addModule(new AutoDodge());
         addModule(new FakeLag());
         addModule(new Flight());
         addModule(new AutoBlock());
@@ -85,7 +84,7 @@ public class ModuleManager implements IMethods {
     }
 
 
-    public List<Module> getModulesInCategory(Module.ModuleCategory categ) {
+    public List<Module> getModulesInCategory(Category categ) {
         java.util.ArrayList<Module> modulesOfCat = new java.util.ArrayList<>();
 
         for (Module mod : modules) {

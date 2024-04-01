@@ -1,6 +1,6 @@
 package dev.stormy.client.clickgui.components;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.Setting;
 import dev.stormy.client.module.setting.impl.*;
 import net.minecraft.client.Minecraft;

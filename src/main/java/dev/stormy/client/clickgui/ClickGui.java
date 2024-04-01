@@ -1,7 +1,8 @@
 package dev.stormy.client.clickgui;
 
 import dev.stormy.client.Stormy;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import net.minecraft.client.gui.GuiScreen;
 import dev.stormy.client.clickgui.components.CategoryComponent;
 import dev.stormy.client.module.impl.client.ClickGuiModule;
@@ -15,11 +16,11 @@ public class ClickGui extends GuiScreen {
     public ClickGui() {
         this.categoryList = new ArrayList<>();
         int topOffset = 5;
-        Module.ModuleCategory[] values;
-        int categoryAmount = (values = Module.ModuleCategory.values()).length;
+        Category[] values;
+        int categoryAmount = (values = Category.values()).length;
 
         for(int category = 0; category < categoryAmount; ++category) {
-            Module.ModuleCategory moduleCategory = values[category];
+            Category moduleCategory = values[category];
             CategoryComponent currentModuleCategory = new CategoryComponent(moduleCategory);
             currentModuleCategory.setY(topOffset);
             categoryList.add(currentModuleCategory);

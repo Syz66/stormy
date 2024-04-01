@@ -2,7 +2,8 @@ package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.events.PacketEvent;
 import dev.stormy.client.mixins.IS12PacketEntityVelocity;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
@@ -14,7 +15,7 @@ public class Velocity extends Module {
     public static ComboSetting<modes> mode;
 
     public Velocity() {
-        super("Velocity", Module.ModuleCategory.Combat, 0);
+        super("Velocity", Category.Combat, 0);
         this.registerSetting(horizontal = new SliderSetting("Horizontal", 90.0D, 0.0D, 200.0D, 1.0D));
         this.registerSetting(vertical = new SliderSetting("Vertical", 100.0D, 0.0D, 200.0D, 1.0D));
         this.registerSetting(chance = new SliderSetting("Chance", 100.0D, 0.0D, 100.0D, 1.0D));

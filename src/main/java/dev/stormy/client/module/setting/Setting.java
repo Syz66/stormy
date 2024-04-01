@@ -22,6 +22,4 @@ public abstract class Setting {
     public abstract String getSettingType();
 
     public abstract void applyConfigFromJson(JsonObject data);
-
-    public abstract Component createComponent(ModuleComponent moduleComponent);
 }

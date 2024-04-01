@@ -2,7 +2,7 @@ package dev.stormy.client.clickgui.components;
 
 import dev.stormy.client.clickgui.Component;
 import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;

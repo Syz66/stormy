@@ -2,7 +2,8 @@ package dev.stormy.client.module.impl.combat;
 
 import dev.stormy.client.Stormy;
 import dev.stormy.client.events.LivingUpdateEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -23,7 +24,7 @@ public class AimAssist extends Module {
     public boolean breakHeld = false;
 
     public AimAssist() {
-        super("AimAssist", ModuleCategory.Combat, 0);
+        super("AimAssist", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Aims at enemies."));
         this.registerSetting(speed = new SliderSetting("Speed", 45.0D, 1.0D, 100.0D, 1.0D));
         this.registerSetting(fov = new SliderSetting("FOV", 90.0D, 15.0D, 180.0D, 1.0D));

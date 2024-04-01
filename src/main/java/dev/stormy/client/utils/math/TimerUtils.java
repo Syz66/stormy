@@ -4,7 +4,7 @@ public class TimerUtils {
     private long lastMS;
 
     private long getCurrentMS() {
-        return System.nanoTime() / 1000000L;
+        return System.currentTimeMillis();
     }
 
     public boolean hasReached(final double milliseconds) {

@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import net.minecraft.client.settings.KeyBinding;
@@ -12,7 +13,7 @@ public class ClosetSpeed extends Module {
     public static TickSetting njd, jump;
 
     public ClosetSpeed() {
-        super("ClosetSpeed", ModuleCategory.Movement, 0);
+        super("ClosetSpeed", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("For more minor speed cheats."));
         this.registerSetting(njd = new TickSetting("No Jump Delay", true));
         this.registerSetting(jump = new TickSetting("Hold Jump", true));

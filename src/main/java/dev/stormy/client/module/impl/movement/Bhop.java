@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.movement;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -21,7 +22,7 @@ public class Bhop extends Module {
     public boolean incomingVelo = false;
 
     public Bhop() {
-        super("Bhop", ModuleCategory.Movement, 0);
+        super("Bhop", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("Bunny Hop"));
         this.registerSetting(Speed = new SliderSetting("Speed", 1.0D, 0.5D, 4.0D, 0.01D));
         this.registerSetting(gs = new SliderSetting("Ground Speed (New)", 1.0D, 1.D, 2.0D, 0.01D));

@@ -2,7 +2,8 @@ package dev.stormy.client.module.impl.movement;
 
 import dev.stormy.client.Stormy;
 import dev.stormy.client.events.HitSlowDownEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.impl.combat.Reach;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
@@ -14,7 +15,7 @@ public class KeepSprint extends Module {
     public static TickSetting reduce, sprint;
 
     public KeepSprint() {
-        super("KeepSprint", ModuleCategory.Movement, 0);
+        super("KeepSprint", Category.Movement, 0);
         this.registerSetting(new DescriptionSetting("Default is 40% motion reduction"));
         this.registerSetting(new DescriptionSetting("and stopping sprint."));
         this.registerSetting(speed = new SliderSetting("Slow %", 40.0D, 0.0D, 100.0D, 1.0D));

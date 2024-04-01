@@ -1,7 +1,8 @@
 package dev.stormy.client.module.impl.player;
 
 import dev.stormy.client.events.UpdateEvent;
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -33,7 +34,7 @@ public class Manager extends Module {
     private boolean moved, open;
     private long nextClick;
     public Manager() {
-        super("Manager", ModuleCategory.Player, 0);
+        super("Manager", Category.Player, 0);
         this.registerSetting(legit = new TickSetting("Legit", true));
         this.registerSetting(delay = new DoubleSliderSetting("Delay", 100, 150, 50, 500, 50));
         this.registerSetting(swordSlot = new SliderSetting("Sword Slot", 1, 1, 9, 1));

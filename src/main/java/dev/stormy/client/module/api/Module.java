@@ -1,10 +1,9 @@
-package dev.stormy.client.module;
+package dev.stormy.client.module.api;
 
 import com.google.gson.JsonObject;
 import dev.stormy.client.module.setting.Setting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.EventBus;
 import org.lwjgl.input.Keyboard;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public abstract class Module {
     protected static Minecraft mc = Minecraft.getMinecraft();
     private final String moduleName;
-    private final ModuleCategory moduleCategory;
+    private final Category moduleCategory;
     @Getter
     protected ArrayList<Setting> settings;
     @Getter
@@ -25,11 +24,7 @@ public abstract class Module {
     protected int defaultKeycode;
     private boolean isToggled = false;
 
-    @Getter
-    @Setter
-    private String suffix;
-
-    public Module(String name, ModuleCategory category, int keybind) {
+    public Module(String name, Category category, int keybind) {
         this.moduleName = name;
         this.moduleCategory = category;
         this.settings = new ArrayList<>();
@@ -113,7 +108,7 @@ public abstract class Module {
         this.settings.add(Setting);
     }
 
-    public ModuleCategory moduleCategory() {
+    public Category moduleCategory() {
         return this.moduleCategory;
     }
 
@@ -148,9 +143,5 @@ public abstract class Module {
         for (Setting setting : this.settings) {
             setting.resetToDefaults();
         }
-    }
-
-    public enum ModuleCategory {
-        Combat, Movement, Player, Render, Client
     }
 }

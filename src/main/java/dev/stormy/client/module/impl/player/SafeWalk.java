@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.player;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DoubleSliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
 
@@ -11,7 +12,7 @@ public class SafeWalk extends Module {
     public static DoubleSliderSetting shiftTime;
 
     public SafeWalk() {
-        super("SafeWalk", ModuleCategory.Player, 0);
+        super("SafeWalk", Category.Player, 0);
         this.registerSetting(shiftOnJump = new TickSetting("Shift during jumps", false));
         this.registerSetting(shiftTime = new DoubleSliderSetting("Shift time: (s)", 140, 200, 0, 280, 5));
         this.registerSetting(onHold = new TickSetting("On shift hold", false));

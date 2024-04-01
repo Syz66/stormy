@@ -1,6 +1,7 @@
 package dev.stormy.client.module.impl.combat;
 
-import dev.stormy.client.module.Module;
+import dev.stormy.client.module.api.Category;
+import dev.stormy.client.module.api.Module;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
@@ -24,7 +25,7 @@ public class RightClicker extends Module {
     int rmb = mc.gameSettings.keyBindUseItem.getKeyCode();
 
     public RightClicker() {
-        super("RightClicker", ModuleCategory.Combat, 0);
+        super("RightClicker", Category.Combat, 0);
         this.registerSetting(new DescriptionSetting("Click automatically"));
         this.registerSetting(rCPS = new SliderSetting("CPS", 10.0D, 1.0D, 20.0D, 1.0D));
         this.registerSetting(noConsumables = new TickSetting("Blacklist Consumables", false));
