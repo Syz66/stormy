@@ -2,17 +2,13 @@ package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
 import dev.stormy.client.module.setting.Setting;
-import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class SliderSetting extends Setting {
-    @Getter
     private final String name;
-    @Getter
     private final double max;
-    @Getter
     private final double min;
     private final double interval;
     private final double defaultVal;
@@ -67,6 +63,19 @@ public class SliderSetting extends Setting {
         if (!data.get("type").getAsString().equals(getSettingType())) return;
 
         setValue(data.get("value").getAsDouble());
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public double getMax() {
+        return max;
+    }
+
+    public double getMin() {
+        return min;
     }
 
     public double getInput() {

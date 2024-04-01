@@ -11,14 +11,12 @@ import dev.stormy.client.module.impl.render.ChestESP;
 import dev.stormy.client.module.impl.render.Nametags;
 import dev.stormy.client.module.impl.render.PlayerESP;
 import dev.stormy.client.utils.IMethods;
-import lombok.Getter;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Getter
 public class ModuleManager implements IMethods {
     public static boolean initialized = false;
     private final List<Module> modules = new ArrayList<>();
@@ -133,5 +131,9 @@ public class ModuleManager implements IMethods {
             }
         }
         return length;
+    }
+
+    public List<Module> getModules() {
+        return modules;
     }
 }

@@ -1,55 +1,60 @@
 package dev.stormy.client.clickgui.components;
 
+import dev.stormy.client.clickgui.Component;
+import dev.stormy.client.clickgui.Theme;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.Theme;
 
 public class DescriptionComponent implements Component {
-   private final DescriptionSetting desc;
-   private final ModuleComponent p;
-   private int o;
+    private final DescriptionSetting desc;
+    private final ModuleComponent parent;
+    private int offset;
 
-   public DescriptionComponent(DescriptionSetting desc, ModuleComponent b, int o) {
-      this.desc = desc;
-      this.p = b;
-      this.o = o;
-   }
+    public DescriptionComponent(DescriptionSetting desc, ModuleComponent parent, int offset) {
+        this.desc = desc;
+        this.parent = parent;
+        this.offset = offset;
+    }
 
-   public void draw() {
-      GL11.glPushMatrix();
-      GL11.glScaled(0.5D, 0.5D, 0.5D);
-      Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.desc.getDesc(), (float)((this.p.category.getX() + 4) * 2), (float)((this.p.category.getY() + this.o + 4) * 2), Theme.getMainColor().getRGB());
-      GL11.glPopMatrix();
-   }
+    @Override
+    public void draw() {
+        GL11.glPushMatrix();
+        GL11.glScaled(0.5D, 0.5D, 0.5D);
 
-   @Override
-   public void update(int mousePosX, int mousePosY) {
+        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(
+                this.desc.getDesc(),
+                (this.parent.category.getX() + 4f) * 2f,
+                (this.parent.category.getY() + this.offset + 3f) * 2f,
+                Theme.getMainColor().getRGB()
+        );
 
-   }
+        GL11.glPopMatrix();
+    }
 
-   @Override
-   public void mouseDown(int x, int y, int b) {
+    @Override
+    public void update(int mousePosX, int mousePosY) {
+    }
 
-   }
+    @Override
+    public void mouseDown(int x, int y, int button) {
+    }
 
-   @Override
-   public void mouseReleased(int x, int y, int m) {
+    @Override
+    public void mouseReleased(int x, int y, int button) {
+    }
 
-   }
+    @Override
+    public void keyTyped(char typedChar, int keyCode) {
+    }
 
-   @Override
-   public void keyTyped(char t, int k) {
+    @Override
+    public void setComponentStartAt(int position) {
+        this.offset = position;
+    }
 
-   }
-
-   public void setComponentStartAt(int n) {
-      this.o = n;
-   }
-
-   @Override
-   public int getHeight() {
-      return 0;
-   }
+    @Override
+    public int getHeight() {
+        return 12;
+    }
 }

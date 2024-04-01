@@ -10,7 +10,6 @@ import dev.stormy.client.module.setting.impl.TickSetting;
 import dev.stormy.client.utils.client.ArrayListUtils;
 import dev.stormy.client.utils.player.PlayerUtils;
 import dev.stormy.client.utils.render.ColorUtils;
-import lombok.Getter;
 import net.weavemc.loader.api.event.RenderGameOverlayEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
@@ -22,9 +21,7 @@ public class ArrayListModule extends Module {
     public static final String HUDY_prefix = "HUDY~ ";
     public static TickSetting editPosition, alphabeticalSort;
     public static ComboSetting<ColorModes> colorMode;
-    @Getter
     public static int hudX = 5;
-    @Getter
     public static int hudY = 5;
     public static ArrayListUtils.PositionMode positionMode;
 
@@ -142,6 +139,14 @@ public class ArrayListModule extends Module {
             }
         }
 
+    }
+
+    public static int getHudX() {
+        return hudX;
+    }
+
+    public static int getHudY() {
+        return hudY;
     }
 
     public enum ColorModes {

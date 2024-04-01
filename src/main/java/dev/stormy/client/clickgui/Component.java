@@ -5,13 +5,13 @@ public interface Component {
 
    void update(int mousePosX, int mousePosY);
 
-   void mouseDown(int x, int y, int b);
+   void mouseDown(int x, int y, int button);
 
-   void mouseReleased(int x, int y, int m);
+   void mouseReleased(int x, int y, int button);
 
-   void keyTyped(char t, int k);
+   void keyTyped(char typedChar, int keyCode);
 
-   void setComponentStartAt(int n);
+   void setComponentStartAt(int position);
 
    int getHeight();
 }

@@ -66,4 +66,13 @@ public class ComboSetting<T extends Enum<?>> extends Setting {
             }
         }
     }
+
+    public void prevMode() {
+        for (int i = options.length - 1; i >= 0; i--) {
+            if (options[i] == currentOption) {
+                currentOption = options[(i - 1 + options.length) % options.length];
+                return;
+            }
+        }
+    }
 }

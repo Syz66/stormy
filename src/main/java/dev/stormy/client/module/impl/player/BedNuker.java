@@ -8,11 +8,15 @@ import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.module.setting.impl.DescriptionSetting;
 import dev.stormy.client.module.setting.impl.SliderSetting;
 import dev.stormy.client.module.setting.impl.TickSetting;
+import dev.stormy.client.utils.player.PlayerUtils;
 import dev.stormy.client.utils.render.Render3DUtils;
 import dev.stormy.client.utils.world.DistanceUtils;
 import dev.stormy.client.utils.world.WorldUtils;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.weavemc.loader.api.event.RenderWorldEvent;
@@ -67,12 +71,28 @@ public class BedNuker extends Module {
     public void onRenderWorld(RenderWorldEvent ev) {
         // TODO: Highlight entire bed.
 
-        if (espMode.getMode().ordinal() - 1 == -1) return;
-        Render3DUtils.drawBlockPos(
-                bedPos,
-                espMode.getMode().ordinal() - 1,
-                Theme.getMainColor().getRGB()
-        );
+        if (PlayerUtils.isPlayerInGame() && bedPos != null && espMode.getMode().ordinal() - 1 != -1) {
+            if (mc.theWorld.getBlockState(bedPos).getBlock() == Blocks.bed) {
+                BlockPos bedPos2 = null;
+
+                IBlockState state = mc.theWorld.getBlockState(bedPos);
+
+                if (state.getValue(BlockBed.PART) == BlockBed.EnumPartType.FOOT) {
+                    bedPos2 = bedPos.offset(state.getValue(BlockBed.FACING));
+                } else if (state.getValue(BlockBed.PART) == BlockBed.EnumPartType.HEAD) {
+                    bedPos2 = bedPos.offset(state.getValue(BlockBed.FACING).getOpposite());
+                }
+
+                if (bedPos2 != null) {
+                    Render3DUtils.drawBlockPoses(
+                            bedPos,
+                            bedPos2,
+                            espMode.getMode().ordinal() - 1,
+                            Theme.getMainColor().getRGB()
+                    );
+                }
+            }
+        }
     }
 
     public enum Modes {

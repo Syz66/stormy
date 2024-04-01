@@ -3,7 +3,6 @@ package dev.stormy.client.module.api;
 import com.google.gson.JsonObject;
 import dev.stormy.client.module.setting.Setting;
 import dev.stormy.client.module.setting.impl.TickSetting;
-import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.EventBus;
 import org.lwjgl.input.Keyboard;
@@ -14,22 +13,19 @@ public abstract class Module {
     protected static Minecraft mc = Minecraft.getMinecraft();
     private final String moduleName;
     private final Category moduleCategory;
-    @Getter
     protected ArrayList<Setting> settings;
-    @Getter
     protected boolean enabled = false;
     protected boolean defaultEnabled = false;
-    @Getter
-    protected int keycode;
+    protected int bind;
     protected int defaultKeycode;
     private boolean isToggled = false;
 
-    public Module(String name, Category category, int keybind) {
+    public Module(String name, Category category, int bind) {
         this.moduleName = name;
         this.moduleCategory = category;
         this.settings = new ArrayList<>();
-        this.keycode = keybind;
-        this.defaultKeycode = keybind;
+        this.bind = bind;
+        this.defaultKeycode = bind;
     }
 
     public JsonObject getConfigAsJson() {
@@ -42,7 +38,7 @@ public abstract class Module {
 
         JsonObject data = new JsonObject();
         data.addProperty("enabled", enabled);
-        data.addProperty("keycode", keycode);
+        data.addProperty("keycode", bind);
         data.add("settings", settings);
 
         return data;
@@ -50,10 +46,10 @@ public abstract class Module {
 
     public void applyConfigFromJson(JsonObject data) {
         try {
-            this.keycode = data.get("keycode").getAsInt();
+            this.bind = data.get("keycode").getAsInt();
             setToggled(data.get("enabled").getAsBoolean());
             JsonObject settingsData = data.get("settings").getAsJsonObject();
-            for (Setting setting : getSettings()) {
+            for (Setting setting : this.getSettings()) {
                 if (settingsData.has(setting.getName())) {
                     setting.applyConfigFromJson(
                             settingsData.get(setting.getName()).getAsJsonObject()
@@ -66,11 +62,11 @@ public abstract class Module {
     }
 
     public void keybind() {
-        if (this.keycode != 0 && this.canBeEnabled()) {
-            if (!this.isToggled && Keyboard.isKeyDown(this.keycode)) {
+        if (this.bind != 0 && this.canBeEnabled()) {
+            if (!this.isToggled && Keyboard.isKeyDown(this.bind)) {
                 this.toggle();
                 this.isToggled = true;
-            } else if (!Keyboard.isKeyDown(this.keycode)) {
+            } else if (!Keyboard.isKeyDown(this.bind)) {
                 this.isToggled = false;
             }
         }
@@ -78,6 +74,14 @@ public abstract class Module {
 
     public boolean canBeEnabled() {
         return true;
+    }
+
+    public ArrayList<Setting> getSettings() {
+        return settings;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void enable() {
@@ -90,6 +94,14 @@ public abstract class Module {
         this.enabled = false;
         EventBus.unsubscribe(this);
         this.onDisable();
+    }
+
+    public void toggle() {
+        if (this.enabled) {
+            this.disable();
+        } else {
+            this.enable();
+        }
     }
 
     public void setToggled(boolean enabled) {
@@ -117,27 +129,22 @@ public abstract class Module {
 
     public void onDisable() {
     }
-
-    public void toggle() {
-        if (this.enabled) {
-            this.disable();
-        } else {
-            this.enable();
-        }
-    }
-
     public void guiUpdate() {
     }
 
     public void guiButtonToggled(TickSetting b) {
     }
 
-    public void setBind(int key) {
-        this.keycode = key;
+    public int getBind() {
+        return bind;
+    }
+
+    public void setBind(int bind) {
+        this.bind = bind;
     }
 
     public void resetToDefaults() {
-        this.keycode = defaultKeycode;
+        this.bind = defaultKeycode;
         this.setToggled(defaultEnabled);
 
         for (Setting setting : this.settings) {

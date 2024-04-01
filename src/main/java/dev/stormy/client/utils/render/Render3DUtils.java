@@ -32,6 +32,33 @@ public class Render3DUtils implements IMethods {
     }
 
     /**
+     * Draws ESP on 2 block positions. (Made for beds)
+     *
+     * @param pos the target block.
+     * @param pos2 the second target block.
+     * @param type the type of ESP.
+     *             0 outline, 1 shaded, 2 both
+     * @param color the color.
+     * @author Syz66
+     */
+    public static void drawBlockPoses(final BlockPos pos, final BlockPos pos2, final int type, final int color) {
+        if (pos != null && pos2 != null) {
+            double minX = Math.min(pos.getX(), pos2.getX()) - mc.getRenderManager().viewerPosX;
+            double minY = Math.min(pos.getY(), pos2.getY()) - mc.getRenderManager().viewerPosY;
+            double minZ = Math.min(pos.getZ(), pos2.getZ()) - mc.getRenderManager().viewerPosZ;
+
+            double maxX = Math.max(pos.getX(), pos2.getX()) + 1.0D - mc.getRenderManager().viewerPosX;
+            double maxY = Math.max(pos.getY(), pos2.getY()) + 1.0D - mc.getRenderManager().viewerPosY;
+            double maxZ = Math.max(pos.getZ(), pos2.getZ()) + 1.0D - mc.getRenderManager().viewerPosZ;
+
+            AxisAlignedBB aabb = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+
+            drawBoundingBox(aabb, type, color);
+        }
+    }
+
+
+    /**
      * Draws ESP on an entity.
      *
      * @param en the target entity.

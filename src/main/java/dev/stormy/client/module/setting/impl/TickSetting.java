@@ -2,10 +2,8 @@ package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
 import dev.stormy.client.module.setting.Setting;
-import lombok.Getter;
 
 public class TickSetting extends Setting {
-    @Getter
     private final String name;
     private final boolean defaultValue;
     private boolean isEnabled;
@@ -15,6 +13,11 @@ public class TickSetting extends Setting {
         this.name = name;
         this.isEnabled = isEnabled;
         this.defaultValue = isEnabled;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override

@@ -1,22 +1,22 @@
 package dev.stormy.client.clickgui.components;
 
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.Theme;
-import dev.stormy.client.module.impl.client.ClickGuiModule;
+import dev.stormy.client.module.setting.impl.ComboSetting;
 import dev.stormy.client.utils.client.ComponentUtils;
 import net.minecraft.client.Minecraft;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import dev.stormy.client.clickgui.Component;
+import dev.stormy.client.clickgui.Theme;
 
-public class BindComponent implements Component {
+public class ComboComponent implements Component {
+    private final ComboSetting<?> combo;
     private final ModuleComponent parent;
-    private boolean binding;
     private int x, y, offset;
 
-    public BindComponent(ModuleComponent module, int offset) {
-        this.parent = module;
-        this.x = module.category.getX() + module.category.getWidth();
-        this.y = module.category.getY() + module.offset;
+    public ComboComponent(ComboSetting<?> combo, ModuleComponent parent, int offset) {
+        this.combo = combo;
+        this.parent = parent;
+        this.x = parent.category.getX() + parent.category.getWidth();
+        this.y = parent.category.getY() + parent.offset;
         this.offset = offset;
     }
 
@@ -25,9 +25,18 @@ public class BindComponent implements Component {
         GL11.glPushMatrix();
         GL11.glScaled(0.5D, 0.5D, 0.5D);
 
+        float width = Minecraft.getMinecraft().fontRendererObj.getStringWidth(this.combo.getName() + ": ") / 2f;
+
         Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(
-                this.binding ? "Select a key..." : "Bind: " + Keyboard.getKeyName(this.parent.mod.getBind()),
+                this.combo.getName() + ": ",
                 (this.parent.category.getX() + 4f) * 2f,
+                (this.parent.category.getY() + this.offset + 3f) * 2f,
+                0xffffffff
+        );
+
+        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(
+                String.valueOf(this.combo.getMode()),
+                (this.parent.category.getX() + 4f + width) * 2f,
                 (this.parent.category.getY() + this.offset + 3f) * 2f,
                 Theme.getMainColor().getRGB()
         );
@@ -43,8 +52,12 @@ public class BindComponent implements Component {
 
     @Override
     public void mouseDown(int x, int y, int button) {
-        if (ComponentUtils.isHovering(x, y, this.x, this.y, parent) && button == 0 && this.parent.po) {
-            this.binding = !this.binding;
+        if(ComponentUtils.isHovering(x, y, this.x, this.y, this.parent)) {
+            if (button == 0) {
+                this.combo.nextMode();
+            } else if (button == 1) {
+                this.combo.prevMode();
+            }
         }
     }
 
@@ -54,20 +67,6 @@ public class BindComponent implements Component {
 
     @Override
     public void keyTyped(char typedChar, int keyCode) {
-        if (this.binding) {
-            if (keyCode == 11) {
-                if (this.parent.mod instanceof ClickGuiModule) {
-                    this.parent.mod.setBind(28);
-                } else {
-                    this.parent.mod.setBind(0);
-                }
-            } else {
-                this.parent.mod.setBind(keyCode);
-            }
-
-            this.binding = false;
-        }
-
     }
 
     @Override
@@ -77,6 +76,6 @@ public class BindComponent implements Component {
 
     @Override
     public int getHeight() {
-        return 0;
+        return 12;
     }
 }

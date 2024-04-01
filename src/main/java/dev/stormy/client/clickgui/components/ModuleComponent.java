@@ -14,14 +14,14 @@ import java.util.ArrayList;
 public class ModuleComponent implements Component {
    public Module mod;
    public CategoryComponent category;
-   public int o;
+   public int offset;
    private final ArrayList<Component> settings;
    public boolean po;
 
    public ModuleComponent(Module mod, CategoryComponent p, int o) {
       this.mod = mod;
       this.category = p;
-      this.o = o;
+      this.offset = o;
       this.settings = new ArrayList<>();
       this.po = false;
       int y = o + 12;
@@ -49,7 +49,7 @@ public class ModuleComponent implements Component {
                y += 16;
             }else if (v instanceof ComboSetting) {
                ComboSetting n = (ComboSetting) v;
-               ModeComponent s = new ModeComponent(n, this, y);
+               ComboComponent s = new ComboComponent(n, this, y);
                this.settings.add(s);
                y += 12;
             }
@@ -60,14 +60,14 @@ public class ModuleComponent implements Component {
    }
 
    public void setComponentStartAt(int n) {
-      this.o = n;
-      int y = this.o + 16;
+      this.offset = n;
+      int y = this.offset + 16;
 
       for (Component c : this.settings) {
          c.setComponentStartAt(y);
          if (c instanceof SliderComponent || c instanceof RangeSliderComponent) {
             y += 16;
-         } else if (c instanceof TickComponent || c instanceof DescriptionComponent || c instanceof ModeComponent || c instanceof BindComponent) {
+         } else if (c instanceof TickComponent || c instanceof DescriptionComponent || c instanceof ComboComponent || c instanceof BindComponent) {
             y += 12;
          }
       }
@@ -119,7 +119,7 @@ public class ModuleComponent implements Component {
    }
 
    public void draw() {
-      v((float)this.category.getX(), (float)(this.category.getY() + this.o), (float)(this.category.getX() + this.category.getWidth()), (float)(this.category.getY() + 15 + this.o), this.mod.isEnabled() ? Theme.getMainColor().getRGB() : -12829381, this.mod.isEnabled() ? Theme.getMainColor().getRGB() : -12302777);
+      v((float)this.category.getX(), (float)(this.category.getY() + this.offset), (float)(this.category.getX() + this.category.getWidth()), (float)(this.category.getY() + 15 + this.offset), this.mod.isEnabled() ? Theme.getMainColor().getRGB() : -12829381, this.mod.isEnabled() ? Theme.getMainColor().getRGB() : -12302777);
       GL11.glPushMatrix();
       int button_rgb;
       if (this.mod.isEnabled()) {
@@ -129,7 +129,7 @@ public class ModuleComponent implements Component {
       } else {
          button_rgb = new Color(102, 102, 102).getRGB();
       }
-      Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.mod.getName(), (float)(this.category.getX() + this.category.getWidth() / 2 - Minecraft.getMinecraft().fontRendererObj.getStringWidth(this.mod.getName()) / 2), (float)(this.category.getY() + this.o + 4), button_rgb);
+      Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.mod.getName(), (float)(this.category.getX() + this.category.getWidth() / 2 - Minecraft.getMinecraft().fontRendererObj.getStringWidth(this.mod.getName()) / 2), (float)(this.category.getY() + this.offset + 4), button_rgb);
       GL11.glPopMatrix();
       if (this.po && !this.settings.isEmpty()) {
          for (Component c : this.settings) {
@@ -149,7 +149,7 @@ public class ModuleComponent implements Component {
          for (Component c : this.settings) {
             if (c instanceof SliderComponent || c instanceof RangeSliderComponent) {
                h += 16;
-            } else if (c instanceof TickComponent || c instanceof DescriptionComponent || c instanceof ModeComponent || c instanceof BindComponent) {
+            } else if (c instanceof TickComponent || c instanceof DescriptionComponent || c instanceof ComboComponent || c instanceof BindComponent) {
                h += 12;
             }
          }
@@ -201,6 +201,6 @@ public class ModuleComponent implements Component {
    }
 
    public boolean ii(int x, int y) {
-      return x > this.category.getX() && x < this.category.getX() + this.category.getWidth() && y > this.category.getY() + this.o && y < this.category.getY() + 16 + this.o;
+      return x > this.category.getX() && x < this.category.getX() + this.category.getWidth() && y > this.category.getY() + this.offset && y < this.category.getY() + 16 + this.offset;
    }
 }

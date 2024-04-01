@@ -22,7 +22,7 @@ public class SliderComponent implements Component {
       this.v = v;
       this.p = b;
       this.x = b.category.getX() + b.category.getWidth();
-      this.y = b.category.getY() + b.o;
+      this.y = b.category.getY() + b.offset;
       this.o = o;
    }
 

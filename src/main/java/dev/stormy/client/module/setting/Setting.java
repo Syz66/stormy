@@ -1,8 +1,6 @@
 package dev.stormy.client.module.setting;
 
 import com.google.gson.JsonObject;
-import dev.stormy.client.clickgui.Component;
-import dev.stormy.client.clickgui.components.ModuleComponent;
 
 public abstract class Setting {
     public String settingName;

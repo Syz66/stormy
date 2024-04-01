@@ -2,13 +2,9 @@ package dev.stormy.client.module.setting.impl;
 
 import com.google.gson.JsonObject;
 import dev.stormy.client.module.setting.Setting;
-import lombok.Getter;
-import lombok.Setter;
 
 public class DescriptionSetting extends Setting {
     private final String defaultDesc;
-    @Getter
-    @Setter
     private String desc;
 
     public DescriptionSetting(String t) {
@@ -41,5 +37,13 @@ public class DescriptionSetting extends Setting {
             return;
 
         setDesc(data.get("value").getAsString());
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }
