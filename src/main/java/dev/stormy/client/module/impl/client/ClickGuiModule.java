@@ -14,7 +14,7 @@ import net.weavemc.loader.api.event.TickEvent;
 public class ClickGuiModule extends Module {
     public static ComboSetting<Colors> clientTheme;
     private final KeyBinding[] moveKeys = new KeyBinding[]{
-            mc.gameSettings.keyBindForward, mc.gameSettings.keyBindBack, mc.gameSettings.keyBindRight, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindJump, mc.gameSettings.keyBindSprint
+            mc.gameSettings.keyBindForward, mc.gameSettings.keyBindBack, mc.gameSettings.keyBindRight, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindJump
     };
 
     public ClickGuiModule() {
