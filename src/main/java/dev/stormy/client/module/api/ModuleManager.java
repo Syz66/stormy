@@ -6,10 +6,7 @@ import dev.stormy.client.module.impl.client.ClickGuiModule;
 import dev.stormy.client.module.impl.combat.*;
 import dev.stormy.client.module.impl.movement.*;
 import dev.stormy.client.module.impl.player.*;
-import dev.stormy.client.module.impl.render.Chams;
-import dev.stormy.client.module.impl.render.ChestESP;
-import dev.stormy.client.module.impl.render.Nametags;
-import dev.stormy.client.module.impl.render.PlayerESP;
+import dev.stormy.client.module.impl.render.*;
 import dev.stormy.client.utils.IMethods;
 import net.minecraft.client.gui.FontRenderer;
 
@@ -41,6 +38,7 @@ public class ModuleManager implements IMethods {
         addModule(new FastPlace());
         addModule(new SafeWalk());
         addModule(new AntiBot());
+        addModule(new BedESP());
         addModule(new Chams());
         addModule(new ChestESP());
         addModule(new Nametags());

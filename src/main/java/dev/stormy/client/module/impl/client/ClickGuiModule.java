@@ -44,6 +44,6 @@ public class ClickGuiModule extends Module {
     }
 
     public enum Colors {
-        Tryfle, Sassan, Gold, Steel, Emerald, Orange, Amethyst, Lily, PastelPink, Pink, Syz
+        Princess, Rose, Paradise, Red, Gold, Steel, Emerald, Orange, Amethyst, Koamaru, Violet
     }
 }

@@ -87,10 +87,10 @@ public class CategoryComponent {
                 moduleRenderManager = moduleInCategoryIterator.next();
             }
 
-            Render2DUtils.drawBorderedRoundedRect(this.x - 1, this.y, this.x + this.width + 1, this.y + this.bh + categoryHeight + 4, 10, 1, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
+            Render2DUtils.drawBorderedRoundedRect(this.x, this.y, this.x + this.width, this.y + this.bh + categoryHeight + 4f, 10f, 2f, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
+        } else if (!this.categoryOpened) {
+            Render2DUtils.drawBorderedRoundedRect(this.x, this.y, this.x + this.width, this.y + this.bh + 4f, 10f, 2f, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
         }
-
-        Render2DUtils.drawBorderedRoundedRect(this.x - 1, this.y, this.x + this.width + 1, this.y + this.bh + 14, 10, 1, Theme.getMainColor().getRGB(), Theme.getBackColor().getRGB());
 
         renderer.drawStringWithShadow(this.n4m ? this.pvp : this.categoryName.name(), (float) (this.x + 2), (float) (this.y + 4), Theme.getMainColor().getRGB());
         if (!this.n4m) {
